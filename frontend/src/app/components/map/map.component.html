@@ -1,0 +1,441 @@
+<div class="dashboard">
+
+    <!-- Sección Izquierda ---->
+    <div class="leftSide">
+         <div class="lateralInfoArea">
+            <div class="tabs">
+                <div class="option" [ngClass]="{'active': showPopTab}" (click)="changeTab('pop')">
+                    <span>Consulta</span>
+                </div>
+                <div class="option" [ngClass]="{'active': showTwitterTab}" (click)="changeTab('twitter')">
+                    <span>Sociodemográficos</span>
+                </div>
+                <div class="option" [ngClass]="{'active': showWMSTab}" (click)="changeTab('wms')">
+                    <span>Capas de Información</span>
+                </div>
+            </div>   
+                
+            <div class="header">
+                <div class="links">
+                    <span class="backPoygon">Consulta</span>
+                </div>                
+            </div>   
+                
+            
+            <div class="content-area">
+                <div class="section" *ngIf="showFilterTab">
+                    <span style="padding-left: 20px;">Nivel:</span>
+                    <div style="padding-left: 20px;">
+                        <select name="select" class="classic" style="width:90%;" (change)="getNivel($event.target.value)">
+                            <option value="ageb" selected>Ageb</option>
+                            <option value="manzana">Manzana</option>
+                            <option value="municipio">Municipio</option>
+                          </select>
+                    </div>
+                    <br><br>
+
+                    <span style="padding-left: 20px;">Rango de edad:</span>
+                    <div style="padding-left: 20px;">
+                        <select name="select" class="classic" style="width:90%;" (change)="selectAgeRange($event.target.value)">
+                            <option value="p_0a2">0 a 2 años</option>
+                            <option value="p_3ymas" >3 y más años</option>
+                            <option value="p_5ymas">5 y más años</option>
+                            <option value="p_12ymas">12 y más años</option>
+                            <option value="p_15ymas">15 y más años</option>
+                            <option value="p_18ymas">18 y más años</option>
+                            <option value="p_3a5">De 3 a 5 años</option>
+                            <option value="p_6a11">De 6 a 11 años</option>
+                            <option value="p_8a14">De 8 a 14 años</option>
+                            <option value="p_15a17">De 15 a 17 años</option>
+                            <option value="p_18a24" selected>De 18 a 24 años</option>
+                            <option value="p_15a49">De 15 a 49 años</option>
+                            <option value="p_60ymas">De 60 y más años</option>
+                           </select>
+                    </div>
+                    <br><br>
+                    
+                    <div style="padding-left: 20px;">
+                        <input type="radio" id="radio_hombres" class="option-input radio" name="select_gender" value="hombres" (change)="selectGender($event.target.value)">
+                        <i class="fa-solid fa-person"></i>
+                        <label style="padding-left: 10px;" for="radio_hombres">Hombres</label><br>
+
+                        <input type="radio" id="radio_mujeres" class="option-input radio" name="select_gender" value="mujeres" (change)="selectGender($event.target.value)">
+                        <i class="fa-solid fa-person-dress"></i>
+                        <label style="padding-left: 10px;" for="radio_mujeres">Mujeres</label><br>
+                       
+                        <input type="radio" id="radio_ambos" class="option-input radio" name="select_gender" value="ambos" checked (change)="selectGender($event.target.value)">
+                        <i class="fa-solid fa-person"></i><i class="fa-solid fa-person-dress"></i>
+                        <label style="padding-left: 10px;" for="radio_ambos">Ambos</label>   
+                    
+
+
+                        <br><br><br>
+                        <!-- <button type="button" (click)="buscar()">buscar</button>   -->                       
+                    </div>
+
+
+                </div>
+            </div>
+            
+          </div>
+    </div>
+    <!-- FIN Sección Izquierda ---->
+    
+    <!--- sección Centro (MAPA)   -->
+    <div class="center">
+        <div class="mapArea">
+            <div id="mapid"></div>   
+
+<!--             <div class="window-pos window-card" cdkDrag >
+                HOla
+            </div> -->
+
+            <!-- Start section of Content of azcapotzalco chart -->
+            <div id="azcapotzalco-chart" [hidden]="!showEconomiaChart" class="window-pos window-card economia pos2" cdkDrag [ngClass]="lightTheme ? 'light' : 'dark'">
+
+                <div id="coloniaDenue_mini" cdkDragHandle>
+                    <div class="header">
+                    <!-- <div style="text-align: center; padding-bottom: 10px"> -->
+<!--                         <table>
+                            <tr>
+                                <td style="width: 700px">
+                                        <span>Datos censo económico {{polygon_selected_name}}</span>
+                                </td>
+                                <td>
+                                        <span class="toggle-window" style="cursor: pointer;" data-toggle="collapse" data-target="#azcapotzalco_data" aria-expanded="true" aria-controls="azcapotzalco_data">
+                                                <i class="far fa-window-minimize"></i>
+                                        </span>
+                                        <span class="toggle-window" style="cursor: pointer; padding-left:6px" (click)="closeAzcapoCenso()">
+                                                <i class="fas fa-times"></i>
+                                        </span>
+                                </td>
+                            </tr>
+
+                        </table> -->
+
+                        <span class="title">Datos censo económico {{polygon_selected_name}}</span>
+                        <span class="toggle-window" style="cursor: pointer;" data-toggle="collapse" data-target="#azcapotzalco_data" aria-expanded="true" aria-controls="azcapotzalco_data">
+                            <i class="far fa-window-minimize"></i>
+                        </span>
+                        <span class="toggle-window" style="cursor: pointer; padding-left:6px" (click)="closeAzcapoCenso()">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </div>
+        
+                    <hr>
+        
+                    <div id="azcapotzalco_data" class="collapse show">
+                         <div style="display: flex; justify-content: center;">
+                            <div style="width: 600px; text-align: center;  align-self: center;">
+                                <div   *ngIf="showEconomiPie">
+                                    <span style="font-weight: bold">{{economiaPieChartTitle.title}}</span>
+                                    <br>
+                                    <span  style="font-size: 14px">{{economiaPieChartTitle.subtitle}}</span>
+                                </div>
+                                <div  *ngIf="showEconomiTable || showEconomiMoney">
+                                    <span style="font-weight: bold">{{economiaBarChartTitle.title}}</span>
+                                    <br>
+                                    <span style="font-size: 14px" >{{economiaBarChartTitle.subtitle}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="azcapotzalco-body">
+                            <div class="chart-menu" style="padding: 20px;">
+                                <div class="menu-parent">
+                                    <span id="azcaMenuOcupado" class="parent azcaActive" (click)="changeEconomiChart('ocupados')">Ocupados</span>
+                                    <span id="azcaMenuOcupadoSexo" class="child" (click)="changeEconomiChart('ocupadoSexo')">Por género</span>
+                                </div>
+                                <div class="menu-parent">
+                                    <span id="azcaMenuRemunerado" class="parent" (click)="changeEconomiChart('remunerados')">Remunerados</span>
+                                    <span id="azcaMenuRemuneradoSexo" class="child" (click)="changeEconomiChart('remuneradoSexo')">Por género</span>
+                                </div>
+                                <div class="menu-parent">
+                                    <span id="azcaMenuProductividad" class="parent" (click)="changeEconomiChart('productividad')">Productividad laboral</span>
+                                    <!-- <span id="azcaMenuProduccion" class="parent" (click)="changeEconomiChart('produccion')">Producción bruta</span>
+                                    <span id="azcaMenuProductividad" class="child" (click)="changeEconomiChart('productividad')">Productividad laboral</span> -->
+                                </div>
+                                <div class="menu-parent">
+                                    <span id="azcaMenuSalario" class="parent" (click)="changeEconomiChart('salario')">Salario promedio</span>
+                                </div>
+                            </div>
+                            <div class="chart" [hidden]="!showEconomiTable">
+                                <div id="economiaBarDiv" style="width: 500px; height: 350px;"></div>
+                                <span>{{economiLabel}}</span>
+                            </div>
+                            <div class="chart" [hidden]="!showEconomiMoney">
+                                <div id="economiaMoneyBarDiv" style="width: 500px; height: 350px;"></div>
+                                <span>{{economiLabel}}</span>
+                            </div>
+                            <div class="chart" [hidden]="!showEconomiPie">
+                                <div id="economiaChartDiv" style="width: 500px; height: 350px;"></div>
+                                <div [innerHTML]="economiLabel"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End section of Content of azcapotzalco chart -->
+
+
+        </div>    
+    </div>
+    
+
+   
+
+    <!--- FIN sección Centro (MAPA)   -->
+
+     <!-- Sección Derecha ---->
+     <div class="rightSide">
+        <div class="lateralInfoArea">
+            <div class="tabs">
+                <div class="option" [ngClass]="{'active': showPoblacionTab}" (click)="changeTab('poblacion')">
+                    <!-- <span>Distribución de COVID-19</span> -->
+                    <span>Población</span>
+                </div>
+                <div class="option" [ngClass]="{'active': showNegociosTab}" (click)="changeTab('negocios')">
+                    <span>Negocios</span>
+                </div>
+                <div class="option" [ngClass]="{'active': showVulTab}" (click)="changeTab('vul')">
+                    <span>Infraestructura</span>
+                </div>
+            </div>  
+            
+            <div class="content-area-right">
+
+                <!-- Tabl de poblacion -->
+                <div class="section" [hidden]="!showPoblacionTab">
+
+                <div class="header">
+                    <span class="dataHeader">
+                    <span>{{ polygon_selected_name }}</span>
+                    </span>
+                </div>
+
+                <br>
+                 <!-- Tarjetas de población -->
+                <div class="infra-cards">
+                       
+                        <div class="subHeader">
+                            <span class="dataSubHeader">Población</span>
+                        </div>
+                        <br><br>
+                        <div class="popScene flipScene can-flip" (click)="toggleFlipCard($event, 'population')">
+                            <!-- <span class="flipText can-flip">Haz clic para cambiar visualización</span> -->
+                            <div id="populationFlipCard" class="flipcard can-flip">
+                                <div class="population-container card-face flipcard-front can-flip">
+                                    <div *ngFor="let popData of pobData | jsonNgfor" class="data-card {{ popData.value.type }} can-flip" placement="top" ngbTooltip="{{popData.value.tooltip}}">
+                                        <div class="icon-card can-flip">
+                                            <i class="{{popData.value.logo}} fa-lg"></i>
+                                        </div>
+                                        <div class="body-card can-flip">
+                                            <div class="body-title can-flip">
+                                                {{ popData.value.title }}
+                                            </div>
+                                            <div class="body-content can-flip">
+                                                <span *ngIf="isNumber(popData.value.total)" class="can-flip">{{ popData.value.total | number }}</span>
+                                                <span *ngIf="!isNumber(popData.value.total)" class="can-flip">{{ popData.value.total}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<!--                                 <div class="amchart-card card-face flipcard-back can-flip">
+                                    <div id="chartdiv"></div>
+                                </div> -->
+                            </div>
+                        </div>                        
+                        </div>
+                        <!-- FIN de Tarjetas de población -->
+
+
+
+                </div>
+                <!-- Fin tab de poblacion -->
+
+
+                <!--Tab de negocios-->
+                <div class="section" [hidden]="!showNegociosTab">
+                    <!--                     <div class="header">
+                        <span class="dataHeader">Vulnerabilidad</span>
+                    </div> -->
+
+                    <div class="header">
+                        <span class="dataHeader">
+                            <span>{{ polygon_selected_name }}</span>
+                        </span>
+                    </div>
+
+
+                    <!-- Información DENUE -->
+                    <div [hidden]="!showDenue">
+                    <div class="subHeader" >
+                        <span class="dataSubHeader">Negocios en la zona</span>
+                    </div>
+
+                    <div  class="mortalityScene flipScene can-flip" (click)="toggleFlipCard($event, 'mortality')">
+                        <span class="flipText can-flip">Haz clic para cambiar visualización</span>                        
+
+                        <!-- <div id="chartDenueDiv" style="height: 400px; z-index: 99;" class="can-flip"></div> -->
+
+                        <div id="mortalityFlipCard" style="height: 400px;" class="flipcard can-flip">
+                                <div class="mortality-container card-face flipcard-front can-flip"  height="400px" style="max-height: 400px; overflow-y: auto;">
+                                    
+                                    <table>
+            <!--                             <tr>
+                                        <td style="font-size: 0.75rem; text-align: center;" colspan="3">
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="checkDenueTuristico" (click)="toggleDenueTuristico()" [checked]="showDenueTuristico">
+                                                <label style="padding-top:2px;" class="custom-control-label" for="checkDenueTuristico">Actividades turísticas</label>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="font-size: 0.75rem; text-align: center;" colspan="3"> Haz clic en una categoría para filtrar los datos </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size: 0.75rem; text-align: center;" colspan="3"> *La información en el mapa puede tardar dependiendo del nivel de zoom </td>
+                                    </tr> -->
+
+                                    <tr>
+                                        <td style="font-size: 0.75rem; text-align: center;" colspan="3">
+                                            <span> <br> </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr *ngFor="let item of denueCategoriesArray; let i = index">
+                                        <td class="row-label row-green-area">
+                                            <!-- <input class="infoCheckbox areaverdeCheckbox" id="denue_{{item.nombre}}" type="checkbox" (click)="filterDenueCategory($event,item)" [checked]="denueCategoriesArray[i].selected"> -->
+                                            <label for="denue_{{item.nombre}}">
+                                                <i class="fa-solid fa-circle" [ngStyle]="{'color': item.color}"></i>&nbsp;{{item.nombre}}</label>
+                                                <!-- <i class="fa-solid fa-circle" [ngStyle]="{'color': item.color}"></i> -->
+                                        </td>
+                                        <td class="row-value row-green-area" style="text-align: auto;">{{item.count | number}}</td>
+                                    </tr>
+
+
+            <!--                            <tr>
+                                        <td class="row-label" style="text-align: center;" colspan="3">
+                                            <br>
+                                            <button style="padding:0px" *ngIf="selectedDenueCategories.length == 0" (click)="denueAllCategories(true)" class="label btn btn-primary">
+                                                <span>ver todos</span>
+                                            </button>
+                                            <button style="padding:0px" *ngIf="selectedDenueCategories.length > 0" (click)="denueAllCategories(false)" class="label btn btn-primary">
+                                                <span>Ocultar todos</span>
+                                            </button>
+                                        </td>
+                                    </tr> -->
+                                            </table>                        
+                                </div>
+                                <div class="card-face flipcard-back can-flip">
+                                <!-- <div class="amchart-card-mortality card-face flipcard-back can-flip"> -->
+                                    <!-- <span>Gráfica</span> -->
+                <!--                         <span *ngIf="nivelPolygons == 'Country' || nivelPolygons == 'UrbanAreas'" class="no-data-legend can-flip">No hay datos</span>
+                                    <div id="chartMortalityRatediv" class="can-flip" [hidden]="nivelPolygons == 'Country' || nivelPolygons == 'UrbanAreas'"></div> -->
+                                    <!-- <div id="chartDenueDiv" style="width: 300%; height:400px" class="can-flip"></div> -->
+                                    <div id="chartDenueDiv" style="width: 350px; height: 400px; z-index: 99;" class="can-flip"></div>
+                                </div>
+                        </div>
+
+
+                    </div>
+                    <br><br>
+                    <div class="subHeader" >
+                        <span class="dataSubHeader">Buscador</span>
+                    </div>
+                    <!-- <br><br> -->
+                   <!--  <div *ngIf = "showSearcher"> -->
+                        <!-- <span style="padding-left: 20px;">Selecciona giro del negocio:</span> -->
+                        <div style="padding-left: 20px ;padding-right: 10px;">
+                            <ng-select [items]="subsectorsDenue" bindLabel="subsector_nombre" subsector="" placeholder="Seleccione un giro de negocio" [(ngModel)]="selectedSubsector" (change)="onSelectSubsector($event)">
+                                <ng-template ng-option-tmp let-item="item"> <!--tooltip-->
+                                    <div title="{{item.subsector_nombre}}">{{item.subsector_nombre}}</div>
+                                </ng-template>
+                            </ng-select>
+                        <!-- </div> -->
+                        <div *ngIf = "showSearchResult">
+                            <span>
+                                "<span style="font-weight: bold;">{{selectedSubsector_name}}</span>"
+                            </span>  
+                            <br>  
+                            <br>                        
+                            <span  *ngIf = "numberOfDenueFeaturesFiltered==0">
+                                No se encontraron negocios de este tipo en la zona
+                            </span>
+
+                            <span *ngIf = "numberOfDenueFeaturesFiltered>0">
+                                Se encontraron {{numberOfDenueFeaturesFiltered}} negocios de este tipo en la zona
+                            </span>   
+                            <br>
+                            <br>
+                            <button type="button" (click)="verHistoricoDenue()">Ver histórico por años</button>
+
+                        </div>                     
+
+
+                        </div>
+
+                </div>
+                <!-- FIN Información DENUE -->
+
+                </div>                
+
+                <!--Fin tab de negocios-->
+
+            </div>
+
+        </div>
+     </div>
+
+
+
+     <!-- FIN Sección Derecha ---->
+
+            <!-- Start section of historical denue chart -->
+            <div [hidden]="!showHistoricalDenueChart" class="window-pos window-card economia pos2" cdkDrag [ngClass]="lightTheme ? 'light' : 'dark'">
+
+                <div id="coloniaDenue_mini" cdkDragHandle>
+                    <div class="header">
+                    <!-- <div style="text-align: center; padding-bottom: 10px"> -->
+<!--                         <table>
+                            <tr>
+                                <td style="width: 700px">
+                                        <span>Datos censo económico {{polygon_selected_name}}</span>
+                                </td>
+                                <td>
+                                        <span class="toggle-window" style="cursor: pointer;" data-toggle="collapse" data-target="#azcapotzalco_data" aria-expanded="true" aria-controls="azcapotzalco_data">
+                                                <i class="far fa-window-minimize"></i>
+                                        </span>
+                                        <span class="toggle-window" style="cursor: pointer; padding-left:6px" (click)="closeAzcapoCenso()">
+                                                <i class="fas fa-times"></i>
+                                        </span>
+                                </td>
+                            </tr>
+
+                        </table> -->
+
+                        <span class="title">Histórico por años</span>
+                        <span class="toggle-window" style="cursor: pointer;" data-toggle="collapse" data-target="#azcapotzalco_data" aria-expanded="true" aria-controls="azcapotzalco_data">
+                            <i class="far fa-window-minimize"></i>
+                        </span>
+                        <span class="toggle-window" style="cursor: pointer; padding-left:6px" (click)="closeHistoricalDenue()">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </div>
+        
+                    <hr>
+                    <div style="width: 400px;">
+                        <br>
+                        <span style="font-weight: bold; text-align: center; justify-content: center; display: flex;">{{selectedSubsector_name}}</span> 
+                        <span style="text-align: center; justify-content: center; display: flex;">Número de negocios por año</span>
+                        <br>
+                        <div style="width: 400px; height: 300px;" id="chartHistoricoDenue"></div>
+                    </div>
+        
+
+            </div>
+            <!-- End section of Content of historical chart -->
+
+
+</div>

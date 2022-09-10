@@ -1,0 +1,37 @@
+.page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.page .header,
+.page .body .page .footer {
+    width: 100%;
+    text-align: center;
+}
+
+.page .header,
+.page .body {
+    text-transform: uppercase;
+}
+
+.page .header {
+    font-family: 'Montserrat-SemiBold';
+    font-size: 4rem;
+    color: #ECC94B;
+}
+
+.page .body {
+    font-family: 'Antonio-Bold';
+    font-size: 1.875rem;
+}
+
+.page .footer a {
+    font-family: 'MyriadPro-Regular';
+    text-decoration: underline;
+    font-size: 1.125rem;
+    color: #4A5568;
+}

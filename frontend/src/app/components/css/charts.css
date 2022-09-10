@@ -1,0 +1,641 @@
+.tweets-chart,
+.c911-chart,
+.webcam-div,
+.bus-chart,
+.rutas-chart,
+.vehicule-chart,
+.companias-chart,
+.infraVerde-chart,
+.remisiones-chart,
+.denuncias-chart,
+.pgjvictims-chart,
+.waze-chart,
+.denue-chart,
+.areasVerdes-chart,
+.refugios-chart,
+.autoTheft-chart,
+.escuelas-chart,
+.colonias-chart,
+.aqi-chart,
+.inundacion-chart,
+.polen-chart,
+.semovi-chart,
+.sensores-chart,
+.general-chart {
+    position: absolute;
+    z-index: 950;
+    background-color: rgba(36, 39, 48, 0.9);
+    border-bottom-left-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+    width: auto !important;
+    color: #ffffff;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.waze-chart,
+.denue-chart,
+.refugios-chart,
+.escuelas-chart {
+    max-width: 650px;
+}
+
+.companias-chart .header,
+.tweets-chart .header {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #01B3F1;
+    border-bottom: 2px solid #66d1f6;
+    height: 3rem;
+}
+
+.remisiones-chart .header,
+.denuncias-chart .header,
+.pgjvictims-chart .header,
+.c911-chart .header,
+.webcam-div .header {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #2a6b45;
+    border-bottom: 2px solid #66d1f6;
+    height: 3rem;
+}
+
+.rutas-chart .header,
+.vehicule-chart .header,
+.bus-chart .header,
+.semovi-chart .header,
+.sensores-chart .header,
+.waze-chart .header {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #78222E;
+    border-bottom: 2px solid #66d1f6;
+    height: 3rem;
+}
+
+.aqi-chart .header,
+.polen-chart .header,
+.areasVerdes-chart .header,
+.infraVerde-chart .header {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #6dc591;
+    border-bottom: 2px solid #66d1f6;
+    height: 3rem;
+}
+
+.denue-chart .header {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #47067b;
+    border-bottom: 2px solid #66d1f6;
+    height: 3rem;
+}
+
+.autoTheft-chart .header,
+.refugios-chart .header,
+.escuelas-chart .header,
+.general-chart .header {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #226776;
+    border-bottom: 2px solid #66d1f6;
+    height: 3rem;
+}
+
+.inundacion-chart .header,
+.colonias-chart .header {
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #ed6716;
+    border-bottom: 2px solid #66d1f6;
+    height: 3rem;
+}
+
+.tweets-chart .header .title,
+.c911-chart .header .title,
+.webcam-div .header .title,
+.bus-chart .header .title,
+.waze-chart .header .title,
+.rutas-chart .header .title,
+.vehicule-chart .header .title,
+.companias-chart .header .title,
+.areasVerdes-chart .header .title,
+.remisiones-chart .header .title,
+.denuncias-chart .header .title,
+.pgjvictims-chart .header .title,
+.denue-chart .header .title,
+.general-chart .header .title,
+.colonias-chart .header .title,
+.inundacion-chart .header .title,
+.aqi-chart .header .title,
+.polen-chart .header .title,
+.refugios-chart .header .title,
+.infraVerde-chart .header .title,
+.semovi-chart .header .title,
+.sensores-chart .header .title,
+.escuelas-chart .header .title {
+    flex: 1 1 0%;
+    text-align: center;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    padding-right: 6px;
+    padding-left: 6px;
+}
+
+.tweets-chart .header i,
+.c911-chart .header i,
+.waze-chart .header i,
+.denue-chart .header i,
+.refugios-chart .header i,
+.general-chart .header i,
+.escuelas-chart .header i,
+.semovi-chart .header i,
+.vehicule-chart .header i,
+.aqi-chart .header i,
+.areasVerdes-chart .header i,
+.infraVerde-chart .header i,
+.polen-chart .header i,
+.inundacion-chart .header i,
+.colonias-chart .header i,
+.bus-chart .header i,
+.rutas-chart .header i {
+    padding-left: 20px;
+}
+
+.btn.btn-outline-light i,
+.btn.btn-outline-secondary i {
+    padding-left: 0 !important;
+}
+
+.tweets-chart .header button,
+.c911-chart .header button,
+.waze-chart .header button,
+.denue-chart .header button,
+.refugios-chart .header button,
+.escuelas-chart .header button {
+    padding: 0px;
+    border: none;
+}
+
+.waze-chart .body,
+.tweets-chart .body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.c911-chart .body,
+.webcam-div .body,
+.bus-chart .body,
+.rutas-chart .body,
+.vehicule-chart .body,
+.companias-chart .body,
+.areasVerdes-chart .body,
+.remisiones-chart .body,
+.denuncias-chart .body,
+.pgjvictims-chart .body,
+.denue-chart .body,
+.general-chart .body,
+.colonias-chart .body,
+.inundacion-chart .body,
+.aqi-chart .body,
+.polen-chart .body,
+.refugios-chart .body,
+.infraVerde-chart .body,
+.semovi-chart .body,
+.sensores-chart .body,
+.autoTheft-chart .body,
+.escuelas-chart .body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.general-chart .body,
+.colonias-chart .body,
+.inundacion-chart .body,
+.aqi-chart .body,
+.polen-chart .body,
+.denuncias-chart .body,
+.pgjvictims-chart .body,
+.semovi-chart .body,
+.sensores-chart .body,
+.remisiones-chart .body {
+    padding: 10px 20px;
+}
+
+.tweets-chart .body ul,
+.c911-chart .body ul,
+.bus-chart .body ul,
+.waze-chart .body ul,
+.rutas-chart .body ul,
+.vehicule-chart .body ul,
+.companias-chart .body ul,
+.areasVerdes-chart .body ul,
+.remisiones-chart .body ul,
+.denuncias-chart .body ul,
+.pgjvictims-chart .body ul,
+.denue-chart .body ul,
+.refugios-chart .body ul,
+.escuelas-chart .body ul,
+.infraVerde-chart .body ul,
+.autoTheft-chart .body ul,
+.colonias-chart .body ul,
+.inundacion-chart .body ul,
+.aqi-chart .body ul,
+.polen-chart .body ul,
+.semovi-chart .body ul,
+.general-chart .body ul {
+    list-style-type: none;
+    width: 100%;
+    padding-inline-start: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.c911-chart .body ul,
+.bus-chart .body ul,
+.waze-chart .body ul,
+.rutas-chart .body ul,
+.vehicule-chart .body ul,
+.companias-chart .body ul,
+.areasVerdes-chart .body ul,
+.remisiones-chart .boyd ul,
+.denuncias-chart .body ul,
+.pgjvictims-chart .body ul,
+.denue-chart .body ul,
+.refugios-chart .body ul,
+.escuelas-chart .body ul,
+.infraVerde-chart .body ul,
+.colonias-chart .body ul,
+.inundacion-chart .body ul,
+.aqi-chart .body ul,
+.polen-chart .body ul,
+.semovi .body ul,
+.sensores .body ul,
+.general-chart .body ul {
+    padding-right: 40px;
+}
+
+.tweets-chart .body .tweets-img,
+.c911-chart .body .c911-img,
+.bus-chart .body .bus-img,
+.waze-chart .body .waze-img,
+.colonias-chart .body .general-img,
+.inundacion-chart .body .general-img,
+.aqi-chart .body .general-img,
+.polen-chart .body .general-img,
+.general-chart .body .general-img,
+.semovi-chart .body .general-img,
+.sensores-chart .body .general-img,
+.refugios-chart .body .refugios-img,
+.escuelas-chart .body .escuelas-img {
+    width: 20px;
+    height: 20px;
+}
+
+.tweets-chart .body .chart-options,
+.c911-chart .body .chart-options,
+.waze-chart .body .chart-options,
+.denue-chart .body .chart-options,
+.refugios-chart .body .chart-options,
+.escuelas-chart .body .chart-options,
+.sensores-chart .body .chart-options,
+.general-chart .body .chart-options,
+.semovi-chart .body .chart-options {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 15px;
+}
+
+.tweets-chart .body .chart-options .chart-btn,
+.c911-chart .body .chart-options .chart-btn,
+.waze-chart .body .chart-options .chart-btn,
+.denue-chart .body .chart-options .chart-btn,
+.refugios-chart .body .chart-options .chart-btn,
+.semovi-chart .body .chart-options .chart-btn,
+.sensores-chart .body .chart-options .chart-btn,
+.general-chart .body .chart-options .chart-btn,
+.escuelas-chart .body .chart-options .chart-btn {
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 2px solid #fff;
+    border-radius: 9999px;
+    width: 4rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(36, 39, 48, 0.6);
+    cursor: pointer;
+}
+
+.tweets-chart .body .chart,
+.c911-chart .body .chart,
+.waze-chart .body .chart,
+.refugios-chart .body .chart,
+.escuelas-chart .body .chart,
+.colonias-chart .body .chart,
+.inundacion-chart .body .chart,
+.aqi-chart .body .chart,
+.polen-chart .body .chart,
+.semovi-chart .body .chart,
+.sensores-chart .body .chart,
+.general-chart .body .chart {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.denue-chart .body .chart {
+    /* display: flex; */
+    width: 97%;
+    align-items: center;
+    justify-content: center;
+}
+
+.waze-chart .body .chart-footer,
+.denue-chart .body .chart-footer,
+.refugios-chart .body .chart-footer,
+.semovi-chart .body .chart-footer,
+.sensores-chart .body .chart-footer,
+.general-chart .body .chart-footer,
+.escuelas-chart .body .chart-footer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.denue-chart .body .chart-footer span {
+    text-align: center;
+}
+
+.waze-chart .body .chart-footer span,
+.semovi-chart .body .chart-footer span,
+.sensores-chart .body .chart-footer span,
+.refugios-chart .body .chart-footer span,
+.general-chart .body .chart-footer span,
+.escuelas-chart .body .chart-footer span {
+    display: flex;
+    align-items: center;
+    padding: 0px 5px;
+}
+
+
+/* .general-chart .body .chart-footer .select-option {
+    max-width: 110px;
+} */
+
+.semovi-chart .body .chart-footer label {
+    margin: 3px;
+    color: white;
+}
+
+
+/* .ng-select.select-option ::ng-deep .ng-select-container  {            
+    min-height: 0px;
+    background-color: #343A40;
+    color: white;    
+} 
+
+.ng-select.select-option ::ng-deep .ng-dropdown-panel  {            
+    background-color: #343A40 !Important;
+    color: white;    
+    min-width: 450px;
+    font-size: 11px;
+}
+.ng-select.select-option ::ng-deep .ng-select-container
+  ::ng-deep .ng-value-container ::ng-deep .ng-input
+  ::ng-deep input {
+  color: white;
+} */
+
+.general-chart .body .chart-footer-option {
+    text-align: center;
+    width: 100%;
+}
+
+.general-chart .body .chart-footer-option label {
+    margin: 3px;
+    color: white;
+}
+
+.webcam-div {
+    max-width: 500px;
+    min-width: 500px;
+}
+
+.webcam-div .header .close-cam-btn {
+    padding-left: 10px;
+    color: #fff;
+}
+
+.webcam-div .body {
+    padding-bottom: 10px;
+}
+
+.webcam-div .body iframe {
+    width: 100%;
+    height: 300px;
+}
+
+.webcam-wrapper {
+    width: 100%;
+}
+
+.no-tweets-text {
+    padding-left: 40px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+::ng-deep .social hr {
+    background-color: #01B3F1 !important;
+}
+
+::ng-deep .economia hr {
+    background-color: #47067b !important;
+}
+
+::ng-deep .seguridad hr,
+::ng-deep .demografia hr {
+    background-color: #2a6b45 !important;
+}
+
+::ng-deep .construccion hr,
+::ng-deep .salud hr {
+    background-color: #226776 !important;
+}
+
+::ng-deep .transporte hr {
+    background-color: #78222E !important;
+}
+
+::ng-deep .terreno hr,
+::ng-deep .educacion hr {
+    background-color: #ed6716 !important;
+}
+
+::ng-deep .ambiental hr,
+::ng-deep .turismo hr {
+    background-color: #6dc591 !important;
+}
+
+::ng-deep .naturalista hr,
+::ng-deep .ecoturismo hr {
+    background-color: #74ac00 !important;
+}
+
+::ng-deep .general hr {
+    background-color: #226776 !important;
+}
+
+::ng-deep .alojamiento hr {
+    background-color: #796060 !important;
+}
+
+.row-img {
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.row-label {
+    font-weight: 600;
+    font-size: .875rem;
+}
+
+.row-label.row-metrobus {
+    padding-right: 20px;
+}
+
+.row-label.row-catastro,
+.row-label.row-green-area,
+.row-label.row-companies,
+.row-label.row-semovi,
+.row-label.row-sensores,
+.row-label.row-naturalista {
+    padding-left: 20px;
+}
+
+.row-label.row-naturalista {
+    text-transform: lowercase;
+}
+
+.row-label.row-naturalista::first-letter,
+.row-label.row-naturalista label span::first-letter,
+.row-label.row-naturalista:first-letter {
+    text-transform: capitalize;
+}
+
+.row-value {
+    text-align: right;
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: .875rem;
+}
+
+::ng-deep .title {
+    display: block;
+    word-break: break-all;
+    text-align: center;
+}
+
+.charts-boundary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: auto;
+}
+
+.scrollbar {
+    min-height: 50px;
+    max-height: 150px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.scale-wrapper {
+    width: 25%;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 105;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+table#demotable {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table#demotable td {
+    width: 14%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table#green_table_unamsed tbody,
+table#green_table_paot tbody,
+table#green_table_cgeo tbody,
+table#green_table_all tbody {
+    display: block;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
+.window-pos.front {
+    z-index: 999;
+}

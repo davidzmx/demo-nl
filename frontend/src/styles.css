@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: 'Montserrat-SemiBold';
+    src: url(/assets/fuentes/montserrat/Montserrat-SemiBold.otf);
+}
+
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url(/assets/fuentes/montserrat/Montserrat-Regular.otf);
+}
+
+@font-face {
+    font-family: 'Antonio-Bold';
+    src: url(/assets/fuentes/antonio/Antonio-Bold.ttf);
+}
+
+@font-face {
+    font-family: 'Antonio-Light';
+    src: url(/assets/fuentes/antonio/Antonio-Light.ttf);
+}
+
+@font-face {
+    font-family: 'MyriadPro-Regular';
+    src: url(/assets/fuentes/myriad/MYRIADPRO-REGULAR.OTF);
+}
+
+@font-face {
+    font-family: 'Helvetica-Light-Regular';
+    src: url(/assets/fuentes/helvetica/Helvetica.ttf);
+}
+
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    /* supported by Chrome and Opera */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled {
+    display: none;
+}

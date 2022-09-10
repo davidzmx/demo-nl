@@ -1,0 +1,2475 @@
+:host {
+    --checkbox-on: #347403;
+    --checkbox-off: #f32c22;
+    --checkbox-textcolor: #ffffff;
+    --range-slider-selection: #145374;
+    --range-slider-pointer: #f09c67;
+    --range-slider-legend: #f8f3f6;
+    --control-icon: #ffffff;
+}
+
+::ng-deep body {
+    overflow: hidden;
+}
+
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+}
+
+.dashboard .leftSide {
+    position: relative;
+    z-index: 9;
+    width: 20%;
+    height: 100%;
+    background-color: rgba(237, 242, 247, 0.7);
+}
+
+.dashboard .center {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.dashboard .rightSide {
+    z-index: 9;
+    width: 20%;
+    height: 100%;
+    background-color: rgba(237, 242, 247, 0.7);
+}
+
+.dashboard .center .mapArea {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.dashboard .leftSide .lateralInfoArea,
+.dashboard .rightSide .lateralInfoArea {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard .leftSide .lateralInfoArea {
+    height: 92%;
+}
+
+#mapid {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+}
+
+.leaflet-container.crosshair-cursor-enabled {
+    cursor: crosshair;
+}
+
+.layerSelector {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 105;
+}
+
+div.ks-cboxtags div.layerContainer {
+    line-height: 1;
+}
+
+div.ks-cboxtags div.layerContainer label {
+    display: inline-block;
+    background-color: var(--checkbox-off);
+    border: 2px solid transparent;
+    color: var(--checkbox-textcolor);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    white-space: nowrap;
+    margin: 3px 0px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s;
+}
+
+div.ks-cboxtags div.layerContainer label {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+div.ks-cboxtags div.layerContainer label::before {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+    padding: 2px 6px 2px 2px;
+    content: "\f067";
+    transition: transform 0.3s ease-in-out;
+}
+
+div.ks-cboxtags div.layerContainer input[type="checkbox"]:checked+label::before {
+    content: "\f00c";
+    transform: rotate(-360deg);
+    transition: transform 0.3s ease-in-out;
+}
+
+div.ks-cboxtags div.layerContainer input[type="checkbox"]:checked+label {
+    border: 2px solid transparent;
+    background-color: var(--checkbox-on);
+    color: var(--checkbox-textcolor);
+    transition: all 0.2s;
+}
+
+div.ks-cboxtags div.layerContainer input[type="checkbox"] {
+    display: absolute;
+}
+
+div.ks-cboxtags div.layerContainer input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
+div.ks-cboxtags div.layerContainer input[type="checkbox"]:focus+label {
+    border: 2px solid transparent;
+}
+
+div.ks-cboxtags div.d-inline-block .btn-outline-primary {
+    color: #ffffff;
+    background-color: var(--checkbox-off);
+    color: var(--checkbox-textcolor);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-color: var(--checkbox-textcolor);
+}
+
+div.ks-cboxtags div.d-inline-block .btn-activate-primary {
+    color: #ffffff;
+    background-color: var(--checkbox-on);
+    color: var(--checkbox-textcolor);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-color: var(--checkbox-textcolor);
+}
+
+.show>.btn-outline-primary.dropdown-toggle:focus {
+    /* box-shadow: 0 0 0 0.2rem rgba(255, 0, 234, 0.5); */
+    box-shadow: unset;
+}
+
+.btn-outline-primary.focus,
+.btn-outline-primary:focus {
+    /* box-shadow: 0 0 0 0.2rem rgb(255, 0, 21); */
+    box-shadow: unset;
+}
+
+div.ks-cboxtags .row {
+    margin-top: 3px;
+    margin-left: -20px;
+    line-height: 0.5;
+}
+
+div.ks-cboxtags .row .dropdown-menu.show div.layerContainer {
+    font-size: 0.9rem;
+    line-height: 0.4;
+}
+
+.dropdown-menu.show {
+    background-color: transparent;
+    border: transparent;
+    margin-left: 85px;
+}
+
+.lateralInfoArea .tabs {
+    font-size: .75rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.lateralInfoArea .tabs .option {
+    background-color: #ffffff;
+    padding: 1rem;
+    width: 33.33%;
+    color: #718096;
+    cursor: pointer;
+    border-bottom: 4px solid #ffffff;
+    text-align: center;
+}
+
+.lateralInfoArea .body .tabs .option:hover {
+    color: #4299e1;
+}
+
+.lateralInfoArea .tabs .option.active {
+    border-bottom: 4px solid #4299e1;
+    color: #4299e1;
+}
+
+@keyframes border {
+    0% {
+        border: 2px dashed orange;
+    }
+    25% {
+        border: 2px solid orange;
+    }
+    50% {
+        border: 2px dashed orange;
+    }
+    75% {
+        border: 2px solid orange;
+    }
+    100% {
+        border: 2px dashed orange;
+    }
+}
+
+@keyframes wobble {
+    50% {
+        border-radius: 750px 550px 350px 750px / 350px 750px 550px 450px;
+    }
+    100% {
+        border-radius: 750px 250px 750px 250px / 250px 750px 250px 750px;
+    }
+}
+
+
+/*MAP Control*/
+
+::ng-deep .mapControlWms .dataSubHeader,
+::ng-deep .mapControlWmsState .dataSubHeader,
+::ng-deep .mapControlWmsEntity .dataSubHeader,
+::ng-deep .mapControlWmsMunicipality .dataSubHeader {
+    font-weight: 500 !important;
+}
+
+::ng-deep .mapControl {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    max-height: 35vh;
+    overflow: hidden;
+}
+
+::ng-deep .mapControl .controlContainer {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    height: 35vh;
+    overflow: auto;
+}
+
+::ng-deep .mapControl .controlContainer .baseMap {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    color: #1A202C;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 2px solid #E2E8F0;
+}
+
+::ng-deep .mapControlWms .controlContainer .baseMap,
+::ng-deep .mapControlWmsState .controlContainer .baseMap,
+::ng-deep .mapControlWmsEntity .controlContainer .baseMap,
+::ng-deep .mapControlWmsMunicipality .controlContainer .baseMap {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    color: #1A202C;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 2px solid #E2E8F0;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0.75rem;
+    width: 80%;
+    margin-left: 10%;
+}
+
+::ng-deep .mapControl .controlContainer .baseMap.active .baseImg,
+::ng-deep .mapControlWms .controlContainer .baseMap.active .baseImg,
+::ng-deep .mapControlWmsState .controlContainer .baseMap.active .baseImg,
+::ng-deep .mapControlWmsEntity .controlContainer .baseMap.active .baseImg,
+::ng-deep .mapControlWmsMunicipality .controlContainer .baseMap.active .baseImg {
+    border: 4px solid #48BB78;
+}
+
+::ng-deep .mapControl .controlContainer .baseMap .baseContainer {
+    width: 40%;
+}
+
+::ng-deep .mapControlWms .controlContainer .baseMap .baseContainer,
+::ng-deep .mapControlWmsState .controlContainer .baseMap .baseContainer,
+::ng-deep .mapControlWmsEntity .controlContainer .baseMap .baseContainer,
+::ng-deep .mapControlWmsMunicipality .controlContainer .baseMap .baseContainer {
+    width: 30%;
+}
+
+::ng-deep .mapControl .controlContainer .baseMap .baseImg,
+::ng-deep .mapControlWms .controlContainer .baseMap .baseImg,
+::ng-deep .mapControlWmsState .controlContainer .baseMap .baseImg,
+::ng-deep .mapControlWmsEntity .controlContainer .baseMap .baseImg,
+::ng-deep .mapControlWmsMunicipality .controlContainer .baseMap .baseImg {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    object-fit: cover;
+    border: 4px solid #CBD5E0;
+}
+
+::ng-deep .mapControl .controlContainer .baseMap .baseName {
+    width: 60%;
+}
+
+::ng-deep .mapControlWms .controlContainer .baseMap .baseName,
+::ng-deep .mapControlWmsState .controlContainer .baseMap .baseName,
+::ng-deep .mapControlWmsEntity .controlContainer .baseMap .baseName,
+::ng-deep .mapControlWmsMunicipality .controlContainer .baseMap .baseName {
+    padding-left: 10px;
+    width: 70%;
+}
+
+.action-container {
+    display: flex;
+    position: absolute;
+    z-index: 105;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.action-container.tutorial {
+    left: 42%;
+    transform: none;
+}
+
+.showControlMapWmsMunicipality,
+.showControlMapWmsEntity,
+.showControlMapWmsState,
+.showControlMapWms,
+.showControlMap,
+.showMapMode,
+.showMapModeExposition,
+.showMapModeExpositionModoNormal,
+.showMapModeExpositionModoNormalCountry,
+.showMapModeExpositionModoRegion,
+.toggle3D,
+.municipalityLayers,
+.resetMap,
+.cdmxHospitalsButton,
+.centerMap {
+    cursor: pointer;
+    background-color: #6D9AB7;
+    padding: 10px;
+}
+
+.drag-button {
+    left: 70px;
+    margin-top: 6px;
+    position: absolute;
+    background-color: rgba(36, 39, 48, 0.5);
+    z-index: 5;
+    border-radius: 20px;
+    width: 190px;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.drag-button-inside-circle {
+    left: 65px;
+    margin-top: 8px;
+    position: absolute;
+    background-color: rgba(52, 116, 3, 1);
+    z-index: 5;
+    border-radius: 20px;
+    width: 190px;
+    padding: 0.5em;
+    text-align: center;
+}
+
+.drag-button-text {
+    /* position: absolute; */
+    /* top: 50%;
+  left: 50%; */
+    padding-left: 5px;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+
+/*Checkboxes styles*/
+
+input[type="checkbox"].infoCheckbox {
+    display: none;
+}
+
+input[type="checkbox"].infoCheckbox+label {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 20px;
+    font: 14px/20px "Open Sans", Arial, sans-serif;
+    color: #1A202C;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+input[type="checkbox"].viaCheckbox+label {
+    color: #1A202C;
+}
+
+input[type="checkbox"].infoCheckbox+label:last-child {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    padding-bottom: 0px;
+}
+
+input[type="checkbox"].infoCheckbox+label:before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #1A202C;
+    position: absolute;
+    left: 0;
+    top: 0;
+    -webkit-transition: all 0.12s, border-color 0.08s;
+    transition: all 0.12s, border-color 0.08s;
+}
+
+input[type="checkbox"].viaCheckbox+label:before {
+    border: 3px solid #1A202C;
+}
+
+input[type="checkbox"].infoCheckbox:checked+label:before {
+    width: 10px;
+    top: -5px;
+    left: 5px;
+    border-radius: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/** CSS Tooltip **/
+
+::ng-deep #chartjs-tooltip {
+    position: absolute;
+    z-index: 99;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.logosBottom {
+    width: 90%;
+    height: 8%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+::ng-deep .info {
+    display: flex;
+    flex-direction: column;
+    color: #ffffff;
+    background-color: rgba(36, 39, 48, 0.5);
+    border-radius: 0.375rem;
+    padding: 10px 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    min-width: 320px;
+}
+
+::ng-deep .info .place {
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+::ng-deep .info .cases {
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+::ng-deep .info .action {
+    color: #F7FAFC;
+    letter-spacing: 0.025em;
+    font-weight: 400;
+    font-size: .75rem;
+}
+
+.main-legend {
+    position: absolute;
+    z-index: 4;
+    left: 21%;
+    bottom: 20px;
+    background-color: rgba(36, 39, 48, 0.5);
+    border-radius: 0.375rem;
+    color: #ffffff;
+    padding: 10px 20px;
+    overflow: auto;
+    max-height: 35vh;
+    width: 18vw;
+}
+
+
+/* .cases-legend {
+    position: absolute;
+    z-index: 4;
+    left: 21%;
+    bottom: 20px;
+    background-color: rgba(36, 39, 48, 0.5);
+    border-radius: 0.375rem;
+    color: #ffffff;
+    padding: 10px 20px;
+}
+
+.cases-legend-covidHospitals {
+    position: absolute;
+    z-index: 4;
+    left: 21%;
+    bottom: 20px;
+    background-color: rgba(36, 39, 48, 0.5);
+    border-radius: 0.375rem;
+    color: #ffffff;
+    padding: 10px 20px;
+}
+
+.cases-legend-mapExposition {
+    position: absolute;
+    z-index: 4;
+    right: 21%;
+    bottom: 20px;
+    background-color: rgba(36, 39, 48, 0.5);
+    border-radius: 0.375rem;
+    color: #ffffff;
+    padding: 10px 20px;
+}
+
+.cases-legends {
+    position: absolute;
+    z-index: 4;
+    left: 21%;
+    bottom: 20px;
+    background-color: rgba(36, 39, 48, 0.5);
+    border-radius: 0.375rem;
+    color: #ffffff;
+    padding: 10px 20px;
+} */
+
+.cases-legend-hospitalsDisponibility {
+    position: absolute;
+    z-index: 4;
+    right: 30%;
+    bottom: 20px;
+    background-color: rgba(36, 39, 48, 0.5);
+    border-radius: 0.375rem;
+    color: #ffffff;
+    padding: 10px 20px;
+    overflow: auto;
+    max-height: 35vh;
+    width: 9vw;
+}
+
+.cases-legend-hospitalsDisponibility .legend,
+.cases-legend-covidHospitals .legend,
+.cases-legend .legend,
+.cases-legends .legend {
+    display: flex;
+    align-self: center;
+    padding-bottom: 2px;
+    letter-spacing: 0.025em;
+}
+
+.cases-legend-covidHospitals .legend {
+    align-items: center;
+}
+
+.cases-legend-covidHospitals .legend .legend-checkbox {
+    padding-left: 5px;
+}
+
+.cases-legend .legend.total,
+.cases-legend-covidHospitals .legend.total {
+    border-top: 1px solid;
+    margin-top: 5px;
+    padding-top: 5px;
+    justify-content: center;
+}
+
+.cases-legends .legend.total {
+    justify-content: center;
+}
+
+.cases-legend .legend.total.exposition,
+.cases-legend-covidHospitals .legend.total.mapCovid {
+    border-top: 0px solid;
+}
+
+
+/*    CSS para clusters  */
+
+::ng-deep .clusterTextPosition {
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+::ng-deep .clusterText {
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-weight: bolder;
+    font-size: 130%;
+    color: white;
+}
+
+::ng-deep .clustersmallpharmacies {
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/farmacias.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-top: 7px;
+    background-clip: padding-box;
+    background-color: #d0736d;
+    text-align: center;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    z-index: -999 !important;
+}
+
+::ng-deep .clustermediumpharmacies {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/farmacias.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-clip: padding-box;
+    background-color: #d2544c;
+    text-align: center;
+    padding-top: 13px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clusterbigpharmacies {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/farmacias.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-clip: padding-box;
+    background-color: #ce574f;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clustersmallpublicDoctors {
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/cpublico.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-top: 7px;
+    background-clip: padding-box;
+    background-color: #89d3c8;
+    text-align: center;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    z-index: -999 !important;
+}
+
+::ng-deep .clustermediumpublicDoctors {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/cpublico.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-clip: padding-box;
+    background-color: #56c9b6;
+    text-align: center;
+    padding-top: 13px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clusterbigpublicDoctors {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/cpublico.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-clip: padding-box;
+    background-color: #0cd3b3;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clustersmallprivateDoctors {
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/cprivado.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-top: 7px;
+    background-clip: padding-box;
+    background-color: #c98dd5;
+    text-align: center;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    z-index: -999 !important;
+}
+
+::ng-deep .clustermediumprivateDoctors {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/cprivado.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-clip: padding-box;
+    background-color: #c264d5;
+    text-align: center;
+    padding-top: 13px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clusterbigprivateDoctors {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/cprivado.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-clip: padding-box;
+    background-color: #b933d5;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clustersmalllabs {
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/laboratorio.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-top: 7px;
+    background-clip: padding-box;
+    background-color: #bfb441;
+    text-align: center;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    z-index: -999 !important;
+}
+
+::ng-deep .clustermediumlabs {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/laboratorio.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-clip: padding-box;
+    background-color: #bfb441;
+    text-align: center;
+    padding-top: 13px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clusterbiglabs {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/laboratorio.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-clip: padding-box;
+    background-color: #bfb441;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clustersmallcovidHospitals {
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/hospital_covid_negro_400px.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-top: 7px;
+    background-clip: padding-box;
+    background-color: #fe0615;
+    text-align: center;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    z-index: -999 !important;
+}
+
+::ng-deep .clustermediumcovidHospitals {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/hospital_covid_negro_400px.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-clip: padding-box;
+    background-color: #fe0615;
+    text-align: center;
+    padding-top: 13px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clusterbigcovidHospitals {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/hospital_covid_negro_400px.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-clip: padding-box;
+    background-color: #fe0615;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clustersmallsedesa {
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/hospital_covid_negro_400px.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    padding-top: 7px;
+    background-clip: padding-box;
+    background-color: #89d3c8;
+    text-align: center;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    z-index: -999 !important;
+}
+
+::ng-deep .clustermediumsedesa {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 40px;
+    height: 40px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/hospital_covid_negro_400px.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    background-clip: padding-box;
+    background-color: #89d3c8;
+    text-align: center;
+    padding-top: 13px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+::ng-deep .clusterbigsedesa {
+    z-index: -999 !important;
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+    margin-left: 5px;
+    margin-top: 5px;
+    background-image: url("/../assets/hospital_covid_negro_400px.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-clip: padding-box;
+    background-color: #89d3c8;
+    text-align: center;
+    padding-top: 20px;
+    box-sizing: border-box;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+
+/* fin CSS para clusters */
+
+.tweetData {
+    display: flex;
+    align-items: flex-end;
+    position: absolute;
+    z-index: 5;
+    bottom: 5px;
+    right: 20%;
+}
+
+.tweetData .toggle {
+    display: flex;
+    background-color: #ffffff;
+    color: rgba(29, 161, 242, 1.00);
+    border: solid 1px #A0AEC0;
+    border-radius: 0.375rem;
+    padding: 10px 5px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.twitterBox {
+    width: 90%;
+    margin: auto;
+}
+
+::ng-deep .twitter-timeline {
+    width: 100% !important;
+    height: 70vh !important;
+}
+
+::ng-deep .divIconMap {
+    text-align: center;
+    /* Horizontally center the text (icon) */
+    line-height: 20px;
+    /* Vertically center the text (icon) */
+    font-size: 20px;
+}
+
+.content-area {
+    height: 84%;
+    overflow: auto;
+}
+
+.content-area-right {
+    height: 90%;
+    overflow: auto;
+}
+
+.content-area::-webkit-scrollbar,
+.content-area-right::-webkit-scrollbar,
+::ng-deep.mapControl .controlContainer::-webkit-scrollbar,
+::ng-deep.mapControlWms .controlContainer::-webkit-scrollbar,
+::ng-deep.mapControlWmsState .controlContainer::-webkit-scrollbar,
+::ng-deep.mapControlWmsEntity .controlContainer::-webkit-scrollbar,
+::ng-deep.mapControlWmsMunicipality .controlContainer::-webkit-scrollbar,
+.main-legend::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.content-area::-webkit-scrollbar-thumb,
+.content-area-right::-webkit-scrollbar-thumb,
+::ng-deep.mapControl .controlContainer::-webkit-scrollbar-thumb,
+::ng-deep.mapControlWms .controlContainer::-webkit-scrollbar-thumb,
+::ng-deep.mapControlWmsState .controlContainer::-webkit-scrollbar-thumb,
+::ng-deep.mapControlWmsEntity .controlContainer::-webkit-scrollbar-thumb,
+::ng-deep.mapControlWmsMunicipality .controlContainer::-webkit-scrollbar-thumb,
+.main-legend::-webkit-scrollbar-thumb {
+    background: #1A202C;
+    border-radius: 4px;
+}
+
+.content-area::-webkit-scrollbar-thumb:active,
+.content-area-right::-webkit-scrollbar-thumb:active,
+::ng-deep.mapControl .controlContainer::-webkit-scrollbar-thumb:active,
+::ng-deep.mapControlWms .controlContainer::-webkit-scrollbar-thumb:active,
+::ng-deep.mapControlWmsState .controlContainer::-webkit-scrollbar-thumb:active,
+::ng-deep.mapControlWmsEntity .controlContainer::-webkit-scrollbar-thumb:active,
+::ng-deep.mapControlWmsMunicipality .controlContainer::-webkit-scrollbar-thumb:active,
+.main-legend::-webkit-scrollbar-thumb:active {
+    background-color: #4A5568;
+}
+
+.content-area::-webkit-scrollbar-thumb:hover,
+.content-area-right::-webkit-scrollbar-thumb:hover,
+::ng-deep.mapControl .controlContainer::-webkit-scrollbar-thumb:hover,
+::ng-deep.mapControlWms .controlContainer::-webkit-scrollbar-thumb:hover,
+::ng-deep.mapControlWmsState .controlContainer::-webkit-scrollbar-thumb:hover,
+::ng-deep.mapControlWmsEntity .controlContainer::-webkit-scrollbar-thumb:hover,
+::ng-deep.mapControlWmsMunicipality .controlContainer::-webkit-scrollbar-thumb:hover,
+.main-legend::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.content-area::-webkit-scrollbar-track,
+.content-area-right::-webkit-scrollbar-track,
+::ng-deep.mapControl .controlContainer::-webkit-scrollbar-track,
+::ng-deep.mapControlWms .controlContainer::-webkit-scrollbar-track,
+::ng-deep.mapControlWmsState .controlContainer::-webkit-scrollbar-track,
+::ng-deep.mapControlWmsEntity .controlContainer::-webkit-scrollbar-track,
+::ng-deep.mapControlWmsMunicipality .controlContainer::-webkit-scrollbar-track,
+.main-legend::-webkit-scrollbar-track {
+    background: #A0AEC0;
+    border-radius: 4px;
+}
+
+.content-area::-webkit-scrollbar-track:hover,
+.content-area::-webkit-scrollbar-track:active,
+.content-area-right::-webkit-scrollbar-track:hover,
+.content-area-right::-webkit-scrollbar-track:active,
+::ng-deep.mapControl .controlContainer::-webkit-scrollbar-track:hover,
+::ng-deep.mapControl .controlContainer::-webkit-scrollbar-track:active,
+::ng-deep.mapControlWms .controlContainer::-webkit-scrollbar-track:hover,
+::ng-deep.mapControlWms .controlContainer::-webkit-scrollbar-track:active,
+::ng-deep.mapControlWmsState .controlContainer::-webkit-scrollbar-track:hover,
+::ng-deep.mapControlWmsState .controlContainer::-webkit-scrollbar-track:active,
+::ng-deep.mapControlWmsEntity .controlContainer::-webkit-scrollbar-track:hover,
+::ng-deep.mapControlWmsEntity .controlContainer::-webkit-scrollbar-track:active,
+::ng-deep.mapControlWmsMunicipality .controlContainer::-webkit-scrollbar-track:hover,
+::ng-deep.mapControlWmsMunicipality .controlContainer::-webkit-scrollbar-track:active,
+.main-legend::-webkit-scrollbar-track:hover,
+.main-legend::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.header .links {
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.header .links a {
+    color: #63B3ED;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.header .backPoygon {
+    padding-left: 5px;
+}
+
+.header .entityName {
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    padding-bottom: 2px;
+}
+
+.header .dataHeader {
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    padding-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.header .dataHeaderInfo {
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    padding-bottom: 2px;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+::ng-deep .subHeader {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 5px;
+}
+
+::ng-deep .subHeader .dataSubHeader {
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-weight: 400;
+    padding-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.pobl-cards,
+.infra-cards,
+.vul-cards {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.pobl-cards .data-card,
+.infra-cards .data-card,
+.vul-cards .data-card {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0.75rem;
+    border-left: 4px solid #CF6363;
+}
+
+.pobl-cards .data-card {
+    position: relative;
+    border-left: 4px solid #FF9F1C;
+}
+
+.infra-cards .data-card {
+    position: relative;
+}
+
+.pobl-cards .data-card .collapse-btn,
+.infra-cards .data-card .collapse-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.infra-cards .data-card.covidHospitals .collapse-btn {
+    color: #1E376D;
+}
+
+.infra-cards .data-card.ventilators .collapse-btn {
+    color: #F2C413
+}
+
+.infra-cards .data-card.beds .collapse-btn {
+    color: #88c1bf
+}
+
+.infra-cards .data-card.medicos .collapse-btn {
+    color: #8a3e93;
+}
+
+.pobl-cards .data-card,
+.infra-cards .data-card {
+    width: 80%;
+    flex-wrap: wrap;
+}
+
+.infra-cards .data-card.pharmacies {
+    border-left: 4px solid #ce574f;
+}
+
+.infra-cards .data-card.publicDoctors {
+    border-left: 4px solid #89d3c8;
+}
+
+.infra-cards .data-card.privateDoctors {
+    border-left: 4px solid #b933d5;
+}
+
+.infra-cards .data-card.labs {
+    border-left: 4px solid #1E376D;
+}
+
+.infra-cards .data-card.publicHospitals {
+    border-left: 4px solid #3832FF;
+}
+
+.infra-cards .data-card.covidHospitals {
+    border-left: 4px solid #1E376D;
+}
+
+.infra-cards .data-card.privateHospitals {
+    border-left: 4px solid #169743;
+}
+
+.infra-cards .data-card.ventilators {
+    border-left: 4px solid #F2C413;
+}
+
+.infra-cards .data-card.beds {
+    border-left: 4px solid #88c1bf;
+}
+
+.infra-cards .data-card.carpas {
+    border-left: 4px solid #d5d5d9;
+}
+
+.infra-cards .data-card.medicos {
+    border-left: 4px solid #8a3e93;
+}
+
+.infra-cards .data-card.access {
+    border-left: 4px solid #4381ef;
+}
+
+.vul-cards .data-card {
+    width: 80%;
+}
+
+.poverty-container .data-card.poverty,
+.mortality-container .data-card.mortality,
+.health-container .data-card.health,
+.population-container .data-card,
+.projection-container .data-card {
+    width: 100%;
+}
+
+.infra-cards .data-card.health {
+    border-left: 4px solid #FF9F1C;
+}
+
+.infra-cards .data-card.poblacion {
+    border-left: 4px solid #FF9F1C;
+}
+
+.infra-cards .data-card.mortality {
+    border-left: 4px solid #1E376D;
+}
+
+.infra-cards .data-card.poverty {
+    border-left: 4px solid #FF9F1C;
+}
+
+.pobl-cards .data-card .icon-card,
+.infra-cards .data-card .icon-card,
+.vul-cards .data-card .icon-card {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    padding-right: 10px;
+    color: #4A5568;
+}
+
+.pobl-cards .data-card .body-card,
+.infra-cards .data-card .body-card,
+.vul-cards .data-card .body-card,
+.vul-cards .data-card .body-gender-card {
+    width: 80%;
+}
+
+.infra-cards .data-card .body-range-card {
+    width: 100%;
+}
+
+.pobl-cards .data-card .information,
+.infra-cards .data-card .information,
+.vul-cards .data-card .information {
+    font-size: .70rem;
+    font-weight: 500;
+}
+
+.pobl-cards .data-card .body-card .body-title,
+.infra-cards .data-card .body-card .body-title,
+.vul-cards .data-card .body-card .body-title,
+.vul-cards .data-card .body-gender-card .body-title,
+.infra-cards .data-card .body-range-card .body-title {
+    font-size: .75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #CF6363;
+    font-weight: 500;
+}
+
+.infra-cards .data-card .body-range-card .body-title {
+    padding-left: 20%;
+}
+
+.infra-cards .data-card.pharmacies .body-card .body-title,
+.infra-cards .data-card.pharmacies .body-card .body-content {
+    color: #ce574f;
+}
+
+.infra-cards .data-card.publicDoctors .body-card .body-title,
+.infra-cards .data-card.publicDoctors .body-card .body-content {
+    color: #89d3c8;
+}
+
+.infra-cards .data-card.privateDoctors .body-card .body-title,
+.infra-cards .data-card.privateDoctors .body-card .body-content {
+    color: #b933d5;
+}
+
+.infra-cards .data-card.labs .body-card .body-title,
+.infra-cards .data-card.labs .body-card .body-content {
+    color: #1E376D;
+}
+
+.infra-cards .data-card.privateHospitals .body-card .body-title,
+.infra-cards .data-card.privateHospitals .body-card .body-content {
+    color: #169743;
+}
+
+.infra-cards .data-card.publicHospitals .body-card .body-title,
+.infra-cards .data-card.publicHospitals .body-card .body-content {
+    color: #3832FF;
+}
+
+.infra-cards .data-card.covidHospitals .body-card .body-title,
+.infra-cards .data-card.covidHospitals .body-card .body-content {
+    color: #1E376D;
+}
+
+.infra-cards .data-card.ventilators .body-card .body-title,
+.infra-cards .data-card.ventilators .body-card .body-content {
+    color: #F2C413;
+}
+
+.infra-cards .data-card.beds .body-card .body-title,
+.infra-cards .data-card.beds .body-card .body-content {
+    color: #88c1bf;
+}
+
+.infra-cards .data-card.carpas .body-card .body-title,
+.infra-cards .data-card.carpas .body-card .body-content {
+    color: #d5d5d9;
+}
+
+.infra-cards .data-card.medicos .body-card .body-title,
+.infra-cards .data-card.medicos .body-card .body-content,
+.infra-cards .data-card.medicos .body-total {
+    color: #8a3e93;
+}
+
+.infra-cards .data-card.access .body-card .body-title,
+.infra-cards .data-card.access .body-card .body-content,
+.infra-cards .data-card.access .body-total {
+    color: #4381ef;
+}
+
+.infra-cards .data-card.mortality .body-card .body-title,
+.infra-cards .data-card.mortality .body-card .body-content {
+    color: #1E376D;
+}
+
+.infra-cards .data-card.poblacion .body-card .body-title,
+.infra-cards .data-card.poblacion .body-card .body-content {
+    color: #FF9F1C;
+}
+
+.infra-cards .data-card.health .body-card .body-title,
+.infra-cards .data-card.health .body-card .body-content {
+    color: #FF9F1C;
+}
+
+.infra-cards .data-card.poverty .body-card .body-title,
+.infra-cards .data-card.poverty .body-card .body-content,
+.infra-cards .data-card.poverty .body-range-card .body-title,
+.infra-cards .data-card.poverty .body-range-card .body-content {
+    color: #FF9F1C;
+}
+
+.pobl-cards .data-card .body-card .body-content,
+.infra-cards .data-card .body-card .body-content,
+.vul-cards .data-card .body-card .body-content {
+    font-size: 1.125rem;
+    letter-spacing: 0.025em;
+    color: #1A202C;
+    font-weight: 700;
+}
+
+.amchart-card-poverty .no-data-legend,
+.amchart-card-mortality .no-data-legend {
+    font-size: 1.125rem;
+    letter-spacing: 0.025em;
+    color: #FF9F1C;
+    font-weight: 700;
+}
+
+.amchart-card-mortality .no-data-legend {
+    color: #1E376D;
+}
+
+.amchart-card-infra .no-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.amchart-card-infra .no-data .no-data-header {
+    font-size: 16px;
+}
+
+.amchart-card-infra .no-data .no-data-subheader {
+    font-size: 12px;
+}
+
+.amchart-card-infra .no-data .no-data-legend {
+    font-size: 1.125rem;
+    letter-spacing: 0.025em;
+    font-weight: 700;
+}
+
+.vul-cards .data-card .body-gender-card .body-content,
+.vul-cards .data-card .body-range-card .body-content {
+    display: flex;
+    font-size: 1rem;
+    letter-spacing: 0.025em;
+    color: #1A202C;
+    font-weight: 700;
+}
+
+.vul-cards .data-card .body-range-card .body-content {
+    justify-content: center;
+    font-size: 1.125rem;
+}
+
+.pobl-cards .data-card .body-card .body-title,
+.pobl-cards .data-card .body-card .body-content {
+    color: #FF9F1C;
+}
+
+.infra-cards .data-card .body-card .body-title,
+.infra-cards .data-card .body-card .body-content {
+    color: #63B3ED;
+}
+
+.vul-cards .data-card .body-gender-card .body-content span {
+    display: flex;
+    align-items: center;
+}
+
+.infra-cards .data-card .body-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 2px;
+}
+
+.chart-card {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0.75rem;
+}
+
+.amchart-card {
+    display: flex;
+    width: 80%;
+    height: 270px;
+    /*     align-items: center; */
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0.75rem;
+}
+
+.amchart-card-mortality {
+    display: flex;
+    width: 80%;
+    height: 350px;
+    /*     align-items: center; */
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0.75rem;
+}
+
+.amchart-card-poverty {
+    display: flex;
+    width: 80%;
+    height: 445px;
+    /*     align-items: center; */
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0.75rem;
+}
+
+.flipScene.bigScene .amchart-card-poverty {
+    height: 550px;
+}
+
+.flipScene.bigScene .amchart-card-mortality {
+    height: 455px;
+}
+
+.amchart-card-agescovid {
+    display: flex;
+    width: 80%;
+    height: 500px;
+    /*     align-items: center; */
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0.75rem;
+}
+
+.amchart-card-infra {
+    display: flex;
+    width: 80%;
+    height: 400px;
+    /*     align-items: center; */
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 0.75rem;
+    background-color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1rem 0.75rem;
+}
+
+.chart-card.infra,
+.chart-card.vul {
+    width: 80%;
+}
+
+.stacked-bar-graph {
+    width: 100%;
+    color: #414042;
+}
+
+.covid-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.covid-chart .chart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+}
+
+.covid-chart .chart .chart-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+::ng-deep .leaflet-right {
+    right: 20%;
+}
+
+::ng-deep .leaflet-left {
+    left: 20%;
+}
+
+svg>g>g.google-visualization-tooltip {
+    pointer-events: none
+}
+
+::ng-deep div.google-visualization-tooltip {
+    pointer-events: none
+}
+
+::ng-deep .google-visualization-tooltip {
+    pointer-events: none;
+}
+
+.poblBtn {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.poblBtn .toggleBtn {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 15px;
+    color: #ffffff;
+    border-radius: 0.375rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+}
+
+.poblBtn .toggleBtn.landing {
+    background-color: #6D9AB7;
+}
+
+.poblBtn .toggleBtn.landing:hover {
+    background-color: #628aa4;
+}
+
+.poblBtn .toggleBtn.dashBtn {
+    background-color: #D47373;
+}
+
+.poblBtn .toggleBtn.dashBtn:hover {
+    background-color: #be6767;
+}
+
+
+/** CSS Slider **/
+
+::ng-deep .infra-cards .data-card .body-range-card .body-content .ng5-slider .ng5-slider-bar {
+    background: #adbde7;
+    height: 2px;
+}
+
+::ng-deep .infra-cards .data-card .body-range-card .body-content .ng5-slider .ng5-slider-selection {
+    background: #1e3675;
+}
+
+::ng-deep .infra-cards .data-card .body-range-card .body-content .ng5-slider .ng5-slider-pointer {
+    width: 8px;
+    height: 16px;
+    top: auto;
+    /* to remove the default positioning */
+    bottom: 0;
+    background-color: #333;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    cursor: default;
+}
+
+::ng-deep .infra-cards .data-card .body-range-card .body-content .ng5-slider .ng5-slider-pointer:after {
+    display: none;
+}
+
+::ng-deep .infra-cards .data-card .body-range-card .body-content .ng5-slider .ng5-slider-bubble {
+    bottom: 14px;
+}
+
+::ng-deep .infra-cards .data-card .body-range-card .body-content .ng5-slider .ng5-slider-limit {
+    font-weight: bold;
+    color: #FF9F1C;
+}
+
+::ng-deep .infra-cards .data-card .body-range-card .body-content .ng5-slider .ng5-slider-tick {
+    width: 1px;
+    height: 10px;
+    margin-left: 4px;
+    border-radius: 0;
+    background: #adbde7;
+    top: -1px;
+}
+
+::ng-deep .infra-cards .data-card .body-range-card .body-content .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+    background: #1e3675;
+}
+
+.poverty-container,
+.mortality-container,
+.health-container,
+.population-container,
+.projection-container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flipScene {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+}
+
+.popScene.flipScene {
+    height: 300px;
+}
+
+.projScene2.flipScene {
+    height: 370px;
+}
+
+.projScene.flipScene {
+    height: 300px;
+}
+
+.healthScene.flipScene {
+    height: 355px;
+}
+
+.mortalityScene.flipScene.smallScene {
+    height: 380px;
+}
+
+.mortalityScene.flipScene.bigScene {
+    height: 500px;
+}
+
+.povertyScene.flipScene.smallScene {
+    height: 470px;
+}
+
+.povertyScene.flipScene.bigScene {
+    height: 590px;
+}
+
+.flipScene .flipText {
+    display: flex;
+    justify-content: center;
+    font-size: .875rem;
+    letter-spacing: 0.025em;
+    color: #2D3748;
+    padding-bottom: 4px;
+    cursor: pointer;
+}
+
+#healthFlipCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 330px;
+}
+
+.smallScene #mortalityFlipCard {
+    height: 355px;
+}
+
+.bigScene #mortalityFlipCard {
+    height: 475px;
+}
+
+.smallScene #povertyFlipCard {
+    height: 445px;
+}
+
+.bigScene #povertyFlipCard {
+    height: 565px;
+}
+
+.flipcard {
+    width: 100%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+}
+
+.flipcard.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    left: 50%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flipcard .flipcard-front {
+    transform: translateX(-50%);
+}
+
+.flipcard .flipcard-back {
+    transform: rotateY(180deg) translateX(50%);
+}
+
+::ng-deep .leaflet-popup-content-wrapper {
+    border-radius: 0rem 0rem 0.25rem 0.25rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+::ng-deep .covid-popup .leaflet-popup-content-wrapper {
+    border-top: 4px solid #1E376D;
+    background-color: #e8ebf0;
+}
+
+::ng-deep .lab-popup .leaflet-popup-content-wrapper {
+    border-top: 4px solid #1E376D;
+    background-color: #f5f5f9;
+}
+
+::ng-deep .private-popup .leaflet-popup-content-wrapper {
+    border-top: 4px solid #b933d5;
+    background-color: #f8eafa;
+}
+
+::ng-deep .public-popup .leaflet-popup-content-wrapper {
+    border-top: 4px solid #89d3c8;
+    background-color: #f3faf9;
+}
+
+::ng-deep .pharma-popup .leaflet-popup-content-wrapper {
+    border-top: 4px solid #CE574F;
+    background-color: #faeeed;
+}
+
+::ng-deep .covid-popup .leaflet-popup-content {
+    width: 400px !important;
+}
+
+::ng-deep .lab-popup .leaflet-popup-content,
+::ng-deep .private-popup .leaflet-popup-content,
+::ng-deep .public-popup .leaflet-popup-content,
+::ng-deep .pharma-popup .leaflet-popup-content {
+    width: 360px !important;
+}
+
+::ng-deep .covid-popup .leaflet-popup-tip {
+    background-color: #e8ebf0;
+}
+
+::ng-deep .leaflet-container .covid-popup a.leaflet-popup-close-button {
+    color: #1E376D;
+}
+
+::ng-deep .lab-popup .leaflet-popup-tip {
+    background-color: #f5f5f9;
+}
+
+::ng-deep .leaflet-container .lab-popup a.leaflet-popup-close-button {
+    color: #1E376D;
+}
+
+::ng-deep .private-popup .leaflet-popup-tip {
+    background-color: #f8eafa;
+}
+
+::ng-deep .leaflet-container .private-popup a.leaflet-popup-close-button {
+    color: #b933d5;
+}
+
+::ng-deep .public-popup .leaflet-popup-tip {
+    background-color: #f3faf9;
+}
+
+::ng-deep .leaflet-container .public-popup a.leaflet-popup-close-button {
+    color: #89d3c8;
+}
+
+::ng-deep .pharma-popup .leaflet-popup-tip {
+    background-color: #faeeed;
+}
+
+::ng-deep .leaflet-container .pharma-popup a.leaflet-popup-close-button {
+    color: #CE574F;
+}
+
+::ng-deep .popup-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .popup-wrapper .popup-content {
+    display: flex;
+    align-items: center;
+    font-size: .75rem;
+    padding-bottom: 4px;
+}
+
+::ng-deep .popup-wrapper .popup-content .popup-title {
+    letter-spacing: 0.025em;
+    font-weight: 700;
+    color: #4A5568;
+    width: 40%;
+}
+
+::ng-deep .popup-wrapper .popup-content .popup-value {
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    color: #1A202C;
+    width: 60%;
+}
+
+input[type="checkbox"].infoCheckbox+label.activateLegend:before {
+    border: 3px solid #ffffff;
+}
+
+input[type="checkbox"].infoCheckbox:checked+label.activateLegend:before {
+    width: 10px;
+    top: -5px;
+    left: 5px;
+    border-radius: 0;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.activateLegend {
+    color: #ffffff !important;
+}
+
+.desactivateLegend {
+    color: #1A202C !important;
+    font-weight: 700 !important;
+}
+
+.legend-source a {
+    display: flex;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.legend-source img {
+    width: 100%;
+}
+
+.infra-container {
+    width: 100%;
+}
+
+.data-childs .data-card .body-card {
+    display: flex;
+    align-items: center;
+}
+
+.data-childs .data-card.covidHospitals {
+    color: #1E376D;
+}
+
+.data-childs .data-card.IMSS {
+    border-left: 4px solid #9dbbc9;
+    color: #9dbbc9;
+}
+
+.data-childs .data-card.IMSS .body-title {
+    color: #9dbbc9 !important;
+}
+
+.data-childs .data-card.ISSSTE {
+    border-left: 4px solid #91accb;
+    color: #91accb;
+}
+
+.data-childs .data-card.ISSSTE .body-title {
+    color: #91accb !important;
+}
+
+.data-childs .data-card.SS,
+.data-childs .data-card.SSA,
+.data-childs .data-card.SEDESA {
+    border-left: 4px solid #b2ced6;
+    color: #b2ced6;
+}
+
+.data-childs .data-card.SS .body-title,
+.data-childs .data-card.SSA .body-title,
+.data-childs .data-card.SEDESA .body-title {
+    color: #b2ced6 !important;
+}
+
+.data-childs .data-card.SEDENA {
+    border-left: 4px solid #96bcb4;
+    color: #96bcb4;
+}
+
+.data-childs .data-card.SEDENA .body-title {
+    color: #96bcb4 !important;
+}
+
+.data-childs .data-card.SEMAR {
+    border-left: 4px solid #bbdcd3;
+    color: #bbdcd3;
+}
+
+.data-childs .data-card.SEMAR .body-title {
+    color: #bbdcd3 !important;
+}
+
+.data-childs .data-card .body-card {
+    width: 70%;
+}
+
+.data-childs .data-card .body-total {
+    width: 30%;
+    text-align: right;
+    font-size: 1.125rem;
+    letter-spacing: 0.025em;
+    font-weight: 700;
+}
+
+::ng-deep .la-square-loader {
+    display: none !important;
+}
+
+::ng-deep .loading-text {
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+::ng-deep .infiniteSpin {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 4000ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spin;
+    -moz-animation-duration: 4000ms;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -ms-animation-name: spin;
+    -ms-animation-duration: 4000ms;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+::ng-deep .icon {
+    font-size: 10px;
+    width: 34px;
+    height: 34px;
+}
+
+::ng-deep .introjs-button {
+    padding: .375rem .75rem !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    border-radius: .25rem !important;
+    text-shadow: none !important;
+    background-image: none !important;
+    border: 1px solid transparent !important;
+}
+
+::ng-deep .introjs-skipbutton {
+    background-color: transparent !important;
+    color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+
+::ng-deep .introjs-skipbutton:hover {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+}
+
+::ng-deep .introjs-prevbutton {
+    margin-right: 2px;
+}
+
+::ng-deep .introjs-prevbutton,
+::ng-deep .introjs-nextbutton {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    color: #ffffff !important;
+}
+
+::ng-deep .introjs-prevbutton:hover,
+::ng-deep .introjs-nextbutton:hover {
+    background-color: #0069d9 !important;
+    border-color: #0062cc !important;
+}
+
+::ng-deep .introjs-prevbutton.introjs-disabled,
+::ng-deep .introjs-nextbutton.introjs-disabled {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    opacity: .65;
+}
+
+#more {
+    display: none;
+}
+
+.section-intro {
+    padding-top: 0.75rem;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    padding-bottom: 1.75rem;
+    text-align: center;
+}
+
+.txt-intro {
+    text-align: left;
+    /* word-break: break-all; */
+}
+
+::ng-deep .tour-info {
+    display: flex;
+}
+
+::ng-deep .tour-info i {
+    padding-right: 10px;
+}
+
+::ng-deep .body-modal-table {
+    max-height: 85vh;
+    overflow: auto;
+}
+
+::ng-deep .btn-sedesa {
+    border: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+::ng-deep .label-sedesa {
+    border-radius: 9999px !important;
+}
+
+::ng-deep .dropdown-menu {
+    margin-left: 20px !important;
+    padding: 0 !important;
+}
+
+.help {
+    cursor: pointer;
+    background-color: #6D9AB7;
+    padding: 10px;
+}
+
+.opacitySelect {
+    position: absolute;
+    top: 10px;
+    right: 30%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 5;
+    width: 300px;
+}
+
+
+/*******************/
+
+select {
+
+    /* styling */
+    background-color: white;
+    border: thin solid blue;
+    border-radius: 4px;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+  
+    /* reset */
+  
+    margin: 0;      
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  
+  
+  /* arrows */
+  
+  select.classic {
+    background-image:
+      linear-gradient(45deg, transparent 50%, blue 50%),
+      linear-gradient(135deg, blue 50%, transparent 50%),
+      linear-gradient(to right, skyblue, skyblue);
+    background-position:
+      calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px),
+      100% 0;
+    background-size:
+      5px 5px,
+      5px 5px,
+      2.5em 2.5em;
+    background-repeat: no-repeat;
+  }
+  
+  select.classic:focus {
+    background-image:
+      linear-gradient(45deg, white 50%, transparent 50%),
+      linear-gradient(135deg, transparent 50%, white 50%),
+      linear-gradient(to right, gray, gray);
+    background-position:
+      calc(100% - 15px) 1em,
+      calc(100% - 20px) 1em,
+      100% 0;
+    background-size:
+      5px 5px,
+      5px 5px,
+      2.5em 2.5em;
+    background-repeat: no-repeat;
+    border-color: grey;
+    outline: 0;
+  }
+
+  /* radiobuttons*/
+  .option-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    transition: all 0.15s ease-out 0s;
+    background: #cbd1d8;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 0.5rem;
+    outline: none;
+    position: relative;
+    z-index: 1000;
+  }
+  .option-input:hover {
+    background: #9faab7;
+  }
+  .option-input:checked {
+    background: #406be0;
+  }
+  .option-input:checked::before {
+    width: 30px;
+    height: 30px;
+    display:flex;
+    /* content: '\f00c'; */
+    font-size: 25px;
+    font-weight:bold;
+    position: absolute;
+    align-items:center;
+    justify-content:center;
+    font-family:'Font Awesome 5 Free';
+  }
+  .option-input:checked::after {
+    -webkit-animation: click-wave 0.65s;
+    -moz-animation: click-wave 0.65s;
+    animation: click-wave 0.65s;
+    background: #406be0;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 100;
+  }
+  .option-input.radio {
+    border-radius: 50%;
+  }
+  .option-input.radio::after {
+    border-radius: 50%;
+  }
+
+ /*  @keyframes click-wave {
+    0% {
+      height: 40px;
+      width: 40px;
+      opacity: 0.35;
+      position: relative;
+    }
+    100% {
+      height: 200px;
+      width: 200px;
+      margin-left: -80px;
+      margin-top: -80px;
+      opacity: 0;
+    } 
+  }*/
+  
+
+/* Estilos censo economico */
+
+
+
+.window-card .azcapotzalco-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+}
+
+.window-card .azcapotzalco-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5px;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+}
+
+.window-card .azcapotzalco-header .titles {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.window-card .azcapotzalco-header .titles .subtitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    width: 60%;
+}
+
+.window-card .azcapotzalco-body .chart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.window-card .azcapotzalco-body .chart-menu .menu-parent {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.window-card .azcapotzalco-body .chart-menu .menu-parent .parent:hover,
+.window-card .azcapotzalco-body .chart-menu .menu-parent .child:hover {
+    color: #4c4c4c;
+    background-color: #ffffff;
+}
+
+.window-card .azcapotzalco-body .chart-menu .menu-parent .child {
+    margin-left: 20px;
+}
+
+.window-card .azcapotzalco-body .chart-menu .menu-parent .azcaActive {
+    background-color: #01B3F1;
+    padding: 3px;
+    font-weight: bold;
+}
+
+.manzana-nav-link {
+    cursor: pointer;
+}
+
+.manzana-nav-link.active:hover {
+    color: #000;
+}
+
+.pos2 {
+    bottom: 5%;
+    right: 5%;
+}
+
+
+.censo-economico {
+    position: absolute;
+    z-index: 4;
+    left: 21%;
+    bottom: 50px;
+    background-color: rgba(36, 39, 48, 0.5);
+    border-radius: 0.375rem;
+    color: #ffffff;
+    padding: 10px 20px;
+    overflow: auto;
+    max-height: 35vh;
+    width: 18vw;
+}
+
+/* FIN Estilos censo economico */
