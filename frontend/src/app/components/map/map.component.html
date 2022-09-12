@@ -86,6 +86,9 @@
                                 <label for="checkMunicipio" style="cursor: pointer;">Mostrar municipio</label>
                             </div>   
 
+                            <div [hidden]= "!showMunicipio" style="padding-left: 25px;" >
+                                <span style="font-size: large; font-weight: bold;">{{currentMunicipioNombre}}</span>
+                            </div>                            
                             
                             <!-- <button type="button" (click)="verEconomiaChart()">Ver censo económico</button> -->
                             <br>
