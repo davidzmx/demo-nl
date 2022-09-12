@@ -1,7 +1,12 @@
 <div class="dashboard">
 
+  
+
     <!-- Sección Izquierda ---->
     <div class="leftSide">
+       <!--  <ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.7)" size="medium" color="#fff" type="square-loader" [fullScreen]="false">
+            <p style="color: white; font-size: 1.5rem; text-align: center;">Cargando...</p>
+        </ngx-spinner> -->          
          <div class="lateralInfoArea">
             <div class="tabs">
                 <div class="option" [ngClass]="{'active': showPopTab}" (click)="changeTab('pop')">
@@ -217,6 +222,9 @@
 
      <!-- Sección Derecha ---->
      <div class="rightSide">
+        <ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.7)" size="medium" color="#fff" type="square-loader" [fullScreen]="false">
+            <p style="color: white; font-size: 1.5rem; text-align: center;">Cargando...</p>
+        </ngx-spinner>           
         <div class="lateralInfoArea">
             <div class="tabs">
                 <div class="option" [ngClass]="{'active': showPoblacionTab}" (click)="changeTab('poblacion')">

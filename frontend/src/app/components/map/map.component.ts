@@ -6,6 +6,7 @@ import gradstop from 'gradstop';
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { NgxSpinnerService } from 'ngx-spinner';
 
 //import { backend_url } from "../../../config/url.config";
 //import { PolygonService } from '../../services/polygon.service';
@@ -215,6 +216,7 @@ export class MapComponent implements OnInit {
   
   constructor(
     private demoService: DemoService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit() {
@@ -526,6 +528,7 @@ export class MapComponent implements OnInit {
   } 
   
   buscar(){
+    this.spinner.show();
     console.log("buscar!")
     this.showDenue = false;
     //this.polygon_selected_name=''
@@ -619,6 +622,7 @@ export class MapComponent implements OnInit {
             "weight": 1
           });  
           layer.on('click', (e) => {
+              that.spinner.show();
               that.map.flyToBounds(layer.getBounds(), { padding: [0, 0]})
               //that.map.flyToBounds(layer.getBounds(), { padding: [0, 0], maxZoom: 12 })
               that.polygon_selected_name = layer.feature.properties.nombre;
@@ -671,10 +675,13 @@ export class MapComponent implements OnInit {
 
       //this.layerGroup.addLayer(that.searched_polygons);
       //this.layerGroup.bringToFront(); 
+      this.spinner.hide();
   });
+  //this.spinner.hide();
   }
 
   consultaDenue(cvegeo){
+    this.spinner.show();
     console.log("consultaDenue, "+cvegeo)
     console.log(this.polygon_selected_geojson)
     let wkt = stringify(this.polygon_selected_geojson);
@@ -801,7 +808,7 @@ export class MapComponent implements OnInit {
 
 
 
-
+      this.spinner.hide();
       console.log(this.denueCategoriesArray)
       this.showDenue = true;
       this.initChartColoniaDenue2('nombre');
