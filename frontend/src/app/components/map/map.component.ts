@@ -11,6 +11,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 //import { PolygonService } from '../../services/polygon.service';
 import { DemoService } from '../../services/demo.service';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
+import { NgTypeToSearchTemplateDirective } from '@ng-select/ng-select/ng-select/ng-templates.directive';
 
 @Component({
   selector: 'app-map',
@@ -30,11 +31,22 @@ export class MapComponent implements OnInit {
   public selected_age_range = "p_18a24";
   //public layerGroup;
   public lightTheme: boolean = true;  
+  public resultFilter;
+  public showResultFilter = false;
 
   public searched_polygons;
   public polygon_selected_name = 'Nuevo León';
   public polygon_selected_cvegeo = '';
   public polygon_selected_geojson = '';
+
+  public polygon_colonia;
+  public showColony = false;
+
+  public polygon_municipio;
+  public showMunicipio = false;  
+  public currentMunicipioCve = ''; 
+  public currentMunicipioNombre = ''; 
+  public selectedMunicipioCve = ''; 
 
 
   /***variables para DENUE */
@@ -116,6 +128,13 @@ export class MapComponent implements OnInit {
   public economiaMoneyBar = undefined;
   public econMoneyValueAxis = undefined;
 
+  //variables para mostrar/ocultar tabs
+  public showFilterTab = true;
+
+  public showPoblacionTab = true;
+  public showNegociosTab = false;
+  public showVulTab = false;  
+
   /****FIN variables para censo económico*** */
 
   public pobData = {
@@ -140,16 +159,57 @@ export class MapComponent implements OnInit {
       total: this.numberWithCommas(2893492),
       logo: 'fas fa-female',
       tooltip: 'Población femenina'
-    }
+    },
+
+    pea: {
+      title: 'Población económicamente activa',
+      type: 'ventilators',
+      total: this.numberWithCommas(2862003),
+      src: '',
+      logo: 'fas fa-users',
+      tooltip: 'Población económicamente activa'
+    },
+    pea_man: {
+      title: 'Población económicamente activa masculina',
+      type: 'ventilators',
+      total: this.numberWithCommas(1750498),
+      logo: 'fas fa-male',
+      tooltip: 'Población económicamente activa masculina'
+    },
+    pea_woman: {
+      title: 'Población económicamente activa femenina',
+      type: 'ventilators',
+      total: this.numberWithCommas(1111505),
+      logo: 'fas fa-female',
+      tooltip: 'Población económicamente activa femenina'
+    },    
+
+    pocupada: {
+      title: 'Población ocupada',
+      type: 'beds',
+      total: this.numberWithCommas(2807449),
+      src: '',
+      logo: 'fas fa-users',
+      tooltip: 'Población económicamente activa'
+    },
+    pocupada_man: {
+      title: 'Población ocupada masculina',
+      type: 'beds',
+      total: this.numberWithCommas(1711371),
+      logo: 'fas fa-male',
+      tooltip: 'Población ocupada masculina'
+    },
+    pocupada_woman: {
+      title: 'Población ocupada femenina',
+      type: 'beds',
+      total: this.numberWithCommas(1096078),
+      logo: 'fas fa-female',
+      tooltip: 'Población ocupada femenina'
+    },      
 
   };
   
-  //variables para mostrar/ocultar tabs
-  public showFilterTab = true;
 
-  public showPoblacionTab = false;
-  public showNegociosTab = true;
-  public showVulTab = false;
  //++++++++++++++++
 
   
@@ -469,6 +529,7 @@ export class MapComponent implements OnInit {
     console.log("buscar!")
     this.showDenue = false;
     //this.polygon_selected_name=''
+    this.showResultFilter=false;
 
     this.onSelectSubsector(undefined)
     if(this.map.hasLayer(this.searched_polygons)){
@@ -480,6 +541,14 @@ export class MapComponent implements OnInit {
     if(this.map.hasLayer(this.filteredDenuePoints)){
       this.map.removeLayer(this.filteredDenuePoints)
     }       
+    if(this.map.hasLayer(this.polygon_colonia)){
+      this.map.removeLayer(this.polygon_colonia)
+      this.showColony=false
+    }   
+    if(this.map.hasLayer(this.polygon_municipio)){
+      this.map.removeLayer(this.polygon_municipio)
+      this.showMunicipio=false
+    }            
 
     
     //this.selectedSubsector = null;
@@ -515,10 +584,17 @@ export class MapComponent implements OnInit {
           "properties": {
             "nombre": element['nombre'],
             "cvegeo": element['cvegeo'],
+            "municipio_cvegeo": element['municipio_cvegeo'],
             "value": element[filter],
             "pob_total": element['pobtot'],
             "pob_hombres": element['pobmas'],
             "pob_mujeres": element['pobfem'],
+            "pea": element['pea'],
+            "pea_hombres": element['pea_m'],
+            "pea_mujeres": element['pea_f'],    
+            "pocupada": element['pea'],
+            "pocupada_hombres": element['pocupada_m'],
+            "pocupada_mujeres": element['pocupada_f'],                      
           },
           "geometry": polygonElement
         }
@@ -548,9 +624,22 @@ export class MapComponent implements OnInit {
               that.polygon_selected_name = layer.feature.properties.nombre;
               that.polygon_selected_cvegeo = layer.feature.properties.cvegeo;
               that.polygon_selected_geojson = layer.feature;
+              that.currentMunicipioCve = layer.feature.properties.municipio_cvegeo;
+
               that.pobData.pobTotal.total = that.numberWithCommas(layer.feature.properties.pob_total);
               that.pobData.man.total=that.numberWithCommas(layer.feature.properties.pob_hombres);
               that.pobData.woman.total=that.numberWithCommas(layer.feature.properties.pob_mujeres);
+              
+              that.pobData.pea.total = that.numberWithCommas(layer.feature.properties.pea);
+              that.pobData.pea_man.total=that.numberWithCommas(layer.feature.properties.pea_hombres);
+              that.pobData.pea_woman.total=that.numberWithCommas(layer.feature.properties.pea_mujeres);    
+              
+              that.pobData.pocupada.total = that.numberWithCommas(layer.feature.properties.pocupada);
+              that.pobData.pocupada_man.total=that.numberWithCommas(layer.feature.properties.pocupada_hombres);
+              that.pobData.pocupada_woman.total=that.numberWithCommas(layer.feature.properties.pocupada_mujeres);               
+              
+              that.resultFilter = that.numberWithCommas(parseInt(layer.feature.properties.value));
+              that.showResultFilter = true;
               that.onSelectSubsector(undefined)
               //that.selectedSubsector = null;
               that.map.once('moveend', function (e) {
@@ -559,7 +648,10 @@ export class MapComponent implements OnInit {
                   that.getCensoEconomico();
                 }
                 else{
+                  that.showEconomiaChart=false;
                   that.consultaDenue(that.polygon_selected_cvegeo);
+                  that.getColoniaFromAgeb();
+                  that.getMunicipioFromAgeb();
                 }
                 
               });
@@ -574,6 +666,8 @@ export class MapComponent implements OnInit {
 
       }).addTo(that.map);
       //that.searched_polygons.bringToFront(); 
+
+      this.map.flyToBounds(this.searched_polygons.getBounds())
 
       //this.layerGroup.addLayer(that.searched_polygons);
       //this.layerGroup.bringToFront(); 
@@ -721,8 +815,11 @@ export class MapComponent implements OnInit {
     let cvegeo = this.polygon_selected_cvegeo;
     let nombre = this.polygon_selected_name
     let nivel = this.selected_level;
-    let id_municipio = cvegeo.substring(2) + ' ' + nombre;
-    console.log(cvegeo,nombre,nivel,id_municipio)
+    //let id_municipio = cvegeo.substring(2) + ' ' + nombre;
+    //console.log(cvegeo,nombre,nivel,id_municipio)
+    
+    let id_municipio = this.currentMunicipioCve.substring(2) + ' ' + this.currentMunicipioNombre;
+    console.log(id_municipio)
 
     this.demoService.getCensoEconomico([id_municipio]).then(
       (data) => {
@@ -735,38 +832,6 @@ export class MapComponent implements OnInit {
         console.error('ERROR', error);
       });    
 
-/*     this.demoService.getCensoEconomico(cvegeo, nivel).then(
-      (data) => {
-        console.log(data)
-        let censoEconomicoData = data;
-        //this.initCensoEconomicoCharts(censoEconomicoData);
-      },
-      (error) => {
-        //this.errorMessage();
-        console.error('ERROR', error);
-      }); */
-    
-/*     if (this.municipioId === '') {
-      this.trenMayaService.getCensoEconomico(this.municipiosIdsCensoEco).then(
-        (data) => {
-          let censoEconomicoData = data;
-          this.initCensoEconomicoCharts(censoEconomicoData);
-        },
-        (error) => {
-          this.errorMessage();
-          console.error('ERROR', error);
-        });
-    } else {
-      this.trenMayaService.getCensoEconomico([this.municipioId]).then(
-        (data) => {
-          let censoEconomicoData = data;
-          this.initCensoEconomicoCharts(censoEconomicoData);
-        },
-        (error) => {
-          this.errorMessage();
-          console.error('ERROR', error);
-        });
-    } */
   }
 
   
@@ -1147,7 +1212,7 @@ export class MapComponent implements OnInit {
 
     this.econSalarioLabel = `En promedio un trabajador gana $${String(splitSalario[0]).replace(/(.)(?=(\d{3})+$)/g, '$1,')}.${splitSalario[1]} pesos mensualmente en el municipio.`;
 
-    this.showEconomiaChart = true;
+    //this.showEconomiaChart = true;
     this.changeEconomiChart(this.selectedTypeCenso);
     //this.spinner.hide();
   }
@@ -1650,5 +1715,180 @@ export class MapComponent implements OnInit {
   closeHistoricalDenue(){
     this.showHistoricalDenueChart = false;
   }
+
+  verEconomiaChart(){
+    this.showEconomiaChart = true;
+  }  
+
+  closeEconomiaChart(){
+    this.showEconomiaChart = false;
+  }  
+
+  toggleShowColony(){
+    console.log("toggleShowColony")
+    this.showColony = !this.showColony;
+    console.log(this.showColony)
+    if(this.polygon_colonia != undefined){
+      if(this.showColony == true){
+        this.polygon_colonia.addTo(this.map)
+        this.map.flyToBounds(this.polygon_colonia.getBounds(), { paddingBottomRight: [0, 0] })
+      }
+      else{
+        this.map.removeLayer(this.polygon_colonia)
+      }
+    }
+  }
+
+  toggleShowMunicipio(){
+    console.log("toggleShowMunicipio")
+    this.showMunicipio = !this.showMunicipio;
+    
+    console.log(this.showMunicipio)
+    if(this.polygon_municipio != undefined){
+      if(this.showMunicipio == true){
+        this.polygon_municipio.addTo(this.map)
+        this.map.flyToBounds(this.polygon_municipio.getBounds(), { paddingBottomRight: [0, 0] })
+      }
+      else{
+        this.map.removeLayer(this.polygon_municipio)
+      }
+    }
+    if(this.showMunicipio ==false){
+      this.showEconomiaChart=false;
+    }
+
+  }  
+
+  getColoniaFromAgeb(){
+    console.log("getColoniaFromAgeb")
+    if(this.map.hasLayer(this.polygon_colonia)){
+      this.map.removeLayer(this.polygon_colonia)
+      this.showColony=false
+    }     
+    let that = this;
+    let wkt = stringify(this.polygon_selected_geojson);
+    console.log(wkt)    
+    this.demoService.getColoniaFromAgeb(wkt).then(
+      (data) => {
+        console.log(data) 
+
+        let array_colonia = []
+        data["colonia"].forEach(element => {
+
+          let newGeometry = {
+            "type": "Feature",
+            "properties": {
+              "colonia_nombre": element.colonia_nombre,
+              "colonia_cve": element.colonia_cve,
+              "colonia_tipo": element.colonia_tipo,
+              "colonia_cp": element.colonia_cp,
+            },
+            "geometry": JSON.parse(element.geom_json)
+          }   
+          array_colonia.push(newGeometry)       
+
+        });
+
+        that.polygon_colonia = new L.geoJSON(array_colonia,{
+          onEachFeature: function (feature, layer) {
+            layer.options.zIndex = 1;
+            layer.bindTooltip(function (layer) {
+              return "Colonia: "+layer.feature.properties.colonia_nombre; //merely sets the tooltip text
+              }, {
+              permanent: false,
+              sticky:false
+            });
+          }
+
+        })//.addTo(that.map);
+      },
+      (error) => {
+        //this.errorMessage();
+        console.error('ERROR', error);
+      });  
+  }
+
+  getMunicipioFromAgeb(){
+    console.log("getMunicipioFromAgeb")
+    if(this.map.hasLayer(this.polygon_municipio)){
+      this.map.removeLayer(this.polygon_municipio)
+      this.showMunicipio=false
+    }     
+    let that = this;
+    console.log(this.currentMunicipioCve)
+
+/*     let wkt = stringify(this.polygon_selected_geojson);
+    console.log(wkt)  */   
+    this.demoService.getMunicipioFromAgeb(this.currentMunicipioCve).then(
+      (data) => {
+        console.log(data) 
+
+        that.currentMunicipioNombre = data["municipio"]["municipio_nombre"]
+        let featureMunicipio = {
+            "type": "Feature",
+            "properties": {
+              "municipio_nombre": data["municipio"]["municipio_nombre"],
+            },
+            "geometry": JSON.parse(data["municipio"]["geom_json"])
+          }            
+
+
+        that.polygon_municipio =  new L.geoJSON(featureMunicipio,{
+          onEachFeature: function (feature, layer) {
+            layer.options.zIndex = 1;
+            layer.setStyle({
+              "color": "#6739b6",
+              'fillColor': "#7f7fff",
+              "opacity": 0.5,
+              "fillOpacity": 0.6,
+              "weight": 1
+            });             
+            layer.bindTooltip(function (layer) {
+              return "Municipio: "+layer.feature.properties.municipio_nombre; //merely sets the tooltip text
+              }, {
+              permanent: false,
+              sticky:false
+            });
+          }
+        })//.addTo(that.map);
+
+        that.getCensoEconomico();
+
+/*         let array_colonia = []
+        data["colonia"].forEach(element => {
+
+          let newGeometry = {
+            "type": "Feature",
+            "properties": {
+              "colonia_nombre": element.colonia_nombre,
+              "colonia_cve": element.colonia_cve,
+              "colonia_tipo": element.colonia_tipo,
+              "colonia_cp": element.colonia_cp,
+            },
+            "geometry": JSON.parse(element.geom_json)
+          }   
+          array_colonia.push(newGeometry)       
+
+        });
+
+        that.polygon_colonia = new L.geoJSON(array_colonia,{
+          onEachFeature: function (feature, layer) {
+            layer.options.zIndex = 1;
+            layer.bindTooltip(function (layer) {
+              return "Colonia: "+layer.feature.properties.colonia_nombre; //merely sets the tooltip text
+              }, {
+              permanent: false,
+              sticky:false
+            });
+          }
+
+        })//.addTo(that.map); */
+      },
+      (error) => {
+        //this.errorMessage();
+        console.error('ERROR', error);
+      });  
+  }
+
 
 }

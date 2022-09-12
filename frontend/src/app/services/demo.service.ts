@@ -12,6 +12,8 @@ export class DemoService {
     readonly URL_API_CENSO_ECONOMICO = backend_url + '/apidemo/censoEconomico/';
     readonly URL_API_SUBCATEGORIES_DENUE = backend_url + '/apidemo/subcategoriesDenue/';
     readonly URL_API_HISTORICAL_DENUE = backend_url + '/apidemo/historicalDenue/';
+    readonly URL_API_GET_COLONIA_FROM_AGEB = backend_url + '/apidemo/getColoniaFromAgeb/';
+    readonly URL_API_GET_MUNICIPIO_FROM_AGEB = backend_url + '/apidemo/getMunicipioFromAgeb/';
 
     constructor(private http: HttpClient) { }
 
@@ -52,5 +54,17 @@ export class DemoService {
             "subsector": subsector
         }).toPromise();
     }       
+
+    getColoniaFromAgeb(wkt){ 
+        return this.http.post(this.URL_API_GET_COLONIA_FROM_AGEB, {
+            "wkt": wkt
+        }).toPromise();
+    }     
+    
+    getMunicipioFromAgeb(municipio_cve){ 
+        return this.http.post(this.URL_API_GET_MUNICIPIO_FROM_AGEB, {
+            "municipio_cve": municipio_cve
+        }).toPromise();
+    }      
 
 }

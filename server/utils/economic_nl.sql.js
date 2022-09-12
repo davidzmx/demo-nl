@@ -185,6 +185,33 @@ sql.historicalDenue = (subsector, wkt, year) => {
 	};
 };
 
+sql.getColoniaFromAgeb = (wkt) => {
+	
+	return {
+		text: `
+			select colonia_cve, colonia_cp, colonia_nombre, colonia_tipo, ST_AsGeoJSON(colonia_geom_4326) geom_json   
+			from nl.dim_colonias2010
+			where  ST_Intersects(
+			  ST_GeomFromText($1, 4326),
+			   colonia_geom_4326
+			  )	 
+        `,
+		values: [wkt]
+	};
+};
+
+sql.getMunicipioFromAgeb = (cve_municipio) => {
+	
+	return {
+		text: `
+			select municipio_nombre, ST_AsGeoJSON(geom) geom_json   
+			from nl.dim_municipio2020
+			where  municipio_cvegeo = $1
+        `,
+		values: [cve_municipio]
+	};
+};
+
 //******* Censo Econímico *********
 sql.ocupados_sectores = (municipio) => {
     let munJoin = `'${municipio.join("','")}'`;

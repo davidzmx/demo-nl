@@ -221,4 +221,46 @@ demoController.getHistoricalDenue = async(req, res) => {
 
 };
 
+
+demoController.getColoniaFromAgeb = async(req, res) => {
+	console.log("getColoniaFromAgeb")
+	const { wkt } = req.body;
+	console.log(wkt)	
+
+    await Promise.all([
+            databasePool.query(sql.getColoniaFromAgeb(wkt))
+        ])
+        .then(poolRes => {
+            res.json({
+                colonia: poolRes[0].rows,
+            });
+        })
+        .catch(err => {
+				console.log(err)
+				res.status(400).send({ message: err.message })
+			}
+		)	
+	
+};
+
+demoController.getMunicipioFromAgeb = async(req, res) => {
+	console.log("getMunicipioFromAgeb")
+	const { municipio_cve } = req.body;
+	console.log(municipio_cve)	
+
+    await Promise.all([
+            databasePool.query(sql.getMunicipioFromAgeb(municipio_cve))
+        ])
+        .then(poolRes => {
+            res.json({
+                municipio: poolRes[0].rows[0],
+            });
+        })
+        .catch(err => {
+				console.log(err)
+				res.status(400).send({ message: err.message })
+			}
+		)	
+};
+
 module.exports = demoController;

@@ -28,8 +28,8 @@
                     <div style="padding-left: 20px;">
                         <select name="select" class="classic" style="width:90%;" (change)="getNivel($event.target.value)">
                             <option value="ageb" selected>Ageb</option>
-                            <option value="manzana">Manzana</option>
-                            <option value="municipio">Municipio</option>
+                            <!-- <option value="manzana">Manzana</option> -->
+                            <!-- <option value="municipio">Municipio</option> -->
                           </select>
                     </div>
                     <br><br>
@@ -70,7 +70,33 @@
 
 
                         <br><br><br>
-                        <!-- <button type="button" (click)="buscar()">buscar</button>   -->                       
+                        <!-- <button type="button" (click)="buscar()">buscar</button>   -->   
+                        <div [hidden]= "!showResultFilter">
+                            <span>Hay <b>{{resultFilter}}</b> personas que concuerdan con el filtro en la zona seleccionada</span>
+                            <br><br>
+
+                            <div class="legend-checkbox">
+                                <input id="checkColonia" type="checkbox" class="infoCheckbox" [checked]="showColony" (change)="toggleShowColony()" />
+                                <label for="checkColonia" style="cursor: pointer;">Mostrar colonia</label>
+                            </div>                            
+
+                            <br>
+                            <div class="legend-checkbox">
+                                <input id="checkMunicipio" type="checkbox" class="infoCheckbox" [checked]="showMunicipio" (change)="toggleShowMunicipio()" />
+                                <label for="checkMunicipio" style="cursor: pointer;">Mostrar municipio</label>
+                            </div>   
+
+                            
+                            <!-- <button type="button" (click)="verEconomiaChart()">Ver censo económico</button> -->
+                            <br>
+                            <div [hidden]= "!showMunicipio" style="padding-left: 25px;" >
+                                <a href="#" class="myButton" (click)="verEconomiaChart()">Ver censo económico</a>
+                            </div>
+                            
+
+                        </div>
+
+                        
                     </div>
 
 
@@ -94,7 +120,7 @@
             <div id="azcapotzalco-chart" [hidden]="!showEconomiaChart" class="window-pos window-card economia pos2" cdkDrag [ngClass]="lightTheme ? 'light' : 'dark'">
 
                 <div id="coloniaDenue_mini" cdkDragHandle>
-                    <div class="header">
+                    <div style="text-align: center; margin-bottom: 10px;">
                     <!-- <div style="text-align: center; padding-bottom: 10px"> -->
 <!--                         <table>
                             <tr>
@@ -113,13 +139,14 @@
 
                         </table> -->
 
-                        <span class="title">Datos censo económico {{polygon_selected_name}}</span>
-                        <span class="toggle-window" style="cursor: pointer;" data-toggle="collapse" data-target="#azcapotzalco_data" aria-expanded="true" aria-controls="azcapotzalco_data">
+                        <span style="font-size: 18px; font-weight: bold;">Datos censo económico {{currentMunicipioNombre}}</span>
+                        <span class="toggle-window" style="cursor: pointer; float: right;" (click)="closeEconomiaChart()">
+                            <i class="fas fa-times"></i>
+                        </span>                        
+                        <span class="toggle-window" style="cursor: pointer; float: right; padding-left: 6px; padding-right: 6px;" data-toggle="collapse" data-target="#azcapotzalco_data" aria-expanded="true" aria-controls="azcapotzalco_data">
                             <i class="far fa-window-minimize"></i>
                         </span>
-                        <span class="toggle-window" style="cursor: pointer; padding-left:6px" (click)="closeAzcapoCenso()">
-                            <i class="fas fa-times"></i>
-                        </span>
+
                     </div>
         
                     <hr>
@@ -369,7 +396,11 @@
                             </span>   
                             <br>
                             <br>
-                            <button type="button" (click)="verHistoricoDenue()">Ver histórico por años</button>
+                            <!-- <button type="button" (click)="verHistoricoDenue()">Ver histórico por años</button> -->
+                            <div style="text-align: center;">
+                                <a href="#" class="myButton" (click)="verHistoricoDenue()">Ver histórico por años</a>
+                            </div>
+                            
 
                         </div>                     
 
@@ -396,7 +427,7 @@
             <div [hidden]="!showHistoricalDenueChart" class="window-pos window-card economia pos2" cdkDrag [ngClass]="lightTheme ? 'light' : 'dark'">
 
                 <div id="coloniaDenue_mini" cdkDragHandle>
-                    <div class="header">
+                    <div style="text-align: center; margin-bottom: 10px;">
                     <!-- <div style="text-align: center; padding-bottom: 10px"> -->
 <!--                         <table>
                             <tr>
@@ -415,17 +446,19 @@
 
                         </table> -->
 
-                        <span class="title">Histórico por años</span>
-                        <span class="toggle-window" style="cursor: pointer;" data-toggle="collapse" data-target="#azcapotzalco_data" aria-expanded="true" aria-controls="azcapotzalco_data">
+                        <span style="font-size: 18px; font-weight: bold;">Histórico por años</span>
+                        
+                        <span class="toggle-window" style="cursor: pointer; float: right;" (click)="closeHistoricalDenue()">
+                            <i class="fas fa-times"></i>
+                        </span>                        
+                        <span class="toggle-window" style="cursor: pointer; float: right; padding-left: 6px; padding-right: 6px;" data-toggle="collapse" data-target="#historical_denue" aria-expanded="true" aria-controls="historical_denue">
                             <i class="far fa-window-minimize"></i>
                         </span>
-                        <span class="toggle-window" style="cursor: pointer; padding-left:6px" (click)="closeHistoricalDenue()">
-                            <i class="fas fa-times"></i>
-                        </span>
+
                     </div>
         
                     <hr>
-                    <div style="width: 400px;">
+                    <div style="width: 400px;" id="historical_denue" class="collapse show">
                         <br>
                         <span style="font-weight: bold; text-align: center; justify-content: center; display: flex;">{{selectedSubsector_name}}</span> 
                         <span style="text-align: center; justify-content: center; display: flex;">Número de negocios por año</span>
