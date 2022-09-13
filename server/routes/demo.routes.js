@@ -11,5 +11,6 @@ router.post('/subcategoriesDenue', demoController.getSubcategoriesDenue);
 router.post('/historicalDenue', demoController.getHistoricalDenue);
 router.post('/getColoniaFromAgeb', demoController.getColoniaFromAgeb);
 router.post('/getMunicipioFromAgeb', demoController.getMunicipioFromAgeb);
+router.post('/getManzanasFromAgeb', demoController.getManzanasFromAgeb);
 
 module.exports = router;

@@ -87,6 +87,11 @@
 
                             <br>
                             <div class="legend-checkbox">
+                                <input id="checkManzanas" type="checkbox" class="infoCheckbox" [checked]="showManzanas" (change)="toggleShowManzanas()" />
+                                <label for="checkManzanas" style="cursor: pointer;">Mostrar manzanas</label>
+                            </div>   
+                            <br>                            
+                            <div class="legend-checkbox">
                                 <input id="checkMunicipio" type="checkbox" class="infoCheckbox" [checked]="showMunicipio" (change)="toggleShowMunicipio()" />
                                 <label for="checkMunicipio" style="cursor: pointer;">Mostrar municipio</label>
                             </div>   
@@ -211,6 +216,22 @@
             </div>
             <!-- End section of Content of azcapotzalco chart -->
 
+            <!-- <div class="cases-legend" *ngIf="showLayerWms && legendWms.length > 0"> -->
+                <div class="main-legend" *ngIf="showManzanas" >
+                    <div class="cases-legend">
+                        <div class="legend titulo">
+                            <span>Nivel socioeconómico  por manzana</span>
+                        </div>
+                    
+                        <div class="legend" *ngFor="let legend of casesLegend">
+                            <span [ngStyle]="{'background-color': legend.color, 'border': 'solid #000 2px'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;
+                            <span>{{ legend.label }}</span>
+                        </div>
+<!--                         <div class="legend total">
+                            <span>Nivel socioeconómico  por manzana</span>
+                        </div> -->
+                    </div>
+                </div>         
 
         </div>    
     </div>
@@ -224,7 +245,8 @@
      <div class="rightSide">
         <ngx-spinner bdOpacity=0.9 bdColor="rgba(51,51,51,0.7)" size="medium" color="#fff" type="square-loader" [fullScreen]="false">
             <p style="color: white; font-size: 1.5rem; text-align: center;">Cargando...</p>
-        </ngx-spinner>           
+        </ngx-spinner>   
+                
         <div class="lateralInfoArea">
             <div class="tabs">
                 <div class="option" [ngClass]="{'active': showPoblacionTab}" (click)="changeTab('poblacion')">

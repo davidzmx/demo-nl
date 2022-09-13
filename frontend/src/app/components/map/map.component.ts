@@ -13,6 +13,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { DemoService } from '../../services/demo.service';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { NgTypeToSearchTemplateDirective } from '@ng-select/ng-select/ng-select/ng-templates.directive';
+//import nl_manzana_nse from '../../../assets/nl_manzana_nse.json';
+
 
 @Component({
   selector: 'app-map',
@@ -48,6 +50,11 @@ export class MapComponent implements OnInit {
   public currentMunicipioCve = ''; 
   public currentMunicipioNombre = ''; 
   public selectedMunicipioCve = ''; 
+
+  public polygon_manzanas;
+  public showManzanas = false;
+
+  public layerGroupManzanas;
 
 
   /***variables para DENUE */
@@ -211,6 +218,33 @@ export class MapComponent implements OnInit {
   };
   
 
+  public casesLegend = [
+    {
+      label: 'Ingresos altos',
+      color: '#2ba37c'
+    },
+    {
+      label: 'Ingresos medio/altos',
+      color: '#54b799'
+    },
+    {
+      label: 'Ingresos medios',
+      color: '#76ccb8'
+    },
+    {
+      label: 'Ingresos medio/bajos',
+      color: '#97e2d7'
+    },
+    {
+      label: 'Ingresos bajos',
+      color: '#b7f7f7'
+    },
+    {
+      label: 'No definido',
+      color: '#bbbec7'
+    }
+  ];  
+
  //++++++++++++++++
 
   
@@ -246,8 +280,16 @@ export class MapComponent implements OnInit {
     this.initDenue();
     this.initSubcategoriesDenue();
 
+    this.layerGroupManzanas = new L.LayerGroup();  
+    this.layerGroupManzanas.addTo(this.map);    
+
     this.layerGroupDenuePoints = new L.LayerGroup();  
     this.layerGroupDenuePoints.addTo(this.map);
+
+    //nl_manzana_nse
+
+/*     let manzana_nse = new L.geoJSON(nl_manzana_nse,{
+    }).addTo(this.map); */
 
   }
   
@@ -451,10 +493,65 @@ export class MapComponent implements OnInit {
     catch{
       return '#000'
     }
-    
-    
   }  
+
+  getColorNivelsocioeconomico(level) {
+    console.log("LEVEL:",level)
+    let color = ""
+    switch(level){
+
+      case 1:
+        color="#b7f7f7";
+        break;
+      case 2:
+        color="#97e2d7";
+        break;
+      case 3:
+        color="#76ccb8";
+        break;
+      case 4:
+        color="#54b799";
+        break;
+      case 5:
+        color="#2ba37c";
+        break; 
+      case 0:
+      default:
+          color="#bbbec7";
+          break;                                                               
+    }
+    return color
+
+  }   
   
+  getNivelSocioeconomico(level) {
+    let nivel_socioeconomico = ""
+    switch(level){
+
+      case 1:
+        nivel_socioeconomico="Ingresos bajos";
+        break;
+      case 2:
+        nivel_socioeconomico="Ingresos medio/bajos";
+        break;
+      case 3:
+        nivel_socioeconomico="Ingresos medios";
+        break;
+      case 4:
+        nivel_socioeconomico="Ingresos medio/altos";
+        break;
+      case 5:
+        nivel_socioeconomico="Ingresos altos";
+        break; 
+      case 0:
+      default:
+        nivel_socioeconomico="No definido";
+          break;                                                               
+    }
+    return nivel_socioeconomico
+
+  }  
+
   changeTab(tab) {
     switch (tab) {
       case 'poblacion':
@@ -547,7 +644,11 @@ export class MapComponent implements OnInit {
     if(this.map.hasLayer(this.polygon_colonia)){
       this.map.removeLayer(this.polygon_colonia)
       this.showColony=false
-    }   
+    }  
+    if(this.map.hasLayer(this.polygon_manzanas)){
+      this.map.removeLayer(this.polygon_manzanas)
+      this.showManzanas=false
+    }         
     if(this.map.hasLayer(this.polygon_municipio)){
       this.map.removeLayer(this.polygon_municipio)
       this.showMunicipio=false
@@ -655,6 +756,7 @@ export class MapComponent implements OnInit {
                   that.showEconomiaChart=false;
                   that.consultaDenue(that.polygon_selected_cvegeo);
                   that.getColoniaFromAgeb();
+                  that.getManzanasFromAgeb();
                   that.getMunicipioFromAgeb();
                 }
                 
@@ -1746,6 +1848,42 @@ export class MapComponent implements OnInit {
     }
   }
 
+  toggleShowManzanas(){
+    console.log("toggleShowManzanas")
+    this.showManzanas = !this.showManzanas;
+    console.log(this.showManzanas)
+    let hasDenuePoints=false
+    let hasDenueFilteredPoints=false
+
+    if(this.polygon_manzanas != undefined){
+      if(this.showManzanas == true){
+        if(this.map.hasLayer(this.denue_points)){ //para que los puntos del denue queden arriba de las manzanas se quitan y se vuelven a agregar
+          hasDenuePoints=true
+          this.map.removeLayer(this.denue_points)
+        }    
+        if(this.map.hasLayer(this.filteredDenuePoints)){
+          hasDenueFilteredPoints =true
+          this.map.removeLayer(this.filteredDenuePoints)
+        }  
+
+        this.polygon_manzanas.addTo(this.map)
+        //this.polygon_manzanas.addTo(this.layerGroupManzanas)
+        //this.map.flyToBounds(this.polygon_manzanas.getBounds(), { paddingBottomRight: [0, 0] })
+
+        if(hasDenuePoints){   //para que los puntos del denue queden arriba de las manzanas se quitan y se vuelven a agregar
+          this.denue_points.addTo(this.map)
+        }
+        if(hasDenueFilteredPoints){
+          this.filteredDenuePoints.addTo(this.map)
+        }
+
+      }
+      else{
+        this.map.removeLayer(this.polygon_manzanas)
+      }
+    }
+  }  
+
   toggleShowMunicipio(){
     console.log("toggleShowMunicipio")
     this.showMunicipio = !this.showMunicipio;
@@ -1801,6 +1939,62 @@ export class MapComponent implements OnInit {
             layer.options.zIndex = 1;
             layer.bindTooltip(function (layer) {
               return "Colonia: "+layer.feature.properties.colonia_nombre; //merely sets the tooltip text
+              }, {
+              permanent: false,
+              sticky:false
+            });
+          }
+
+        })//.addTo(that.map);
+      },
+      (error) => {
+        //this.errorMessage();
+        console.error('ERROR', error);
+      });  
+  }
+
+
+  getManzanasFromAgeb(){
+    console.log("getManzanasFromAgeb")
+    if(this.map.hasLayer(this.polygon_manzanas)){
+      this.map.removeLayer(this.polygon_manzanas)
+      this.showManzanas=false
+    }     
+    let that = this;
+    let wkt = stringify(this.polygon_selected_geojson);
+    console.log(wkt)    
+    this.demoService.getManzanasFromAgeb(this.polygon_selected_cvegeo,wkt).then(
+      (data) => {
+        console.log(data) 
+
+        let array_manzanas = []
+        data["manzanas"].forEach(element => {
+
+          let newGeometry = {
+            "type": "Feature",
+            "properties": {
+              "manzana_cve": element.cvegeo,
+              "nse_score1": element.nse_score1,
+              "nivel_socioeconomico": that.getNivelSocioeconomico(element.nse_score1)
+            },
+            "geometry": JSON.parse(element.geom_json)
+          }   
+          array_manzanas.push(newGeometry)       
+
+        });
+
+        that.polygon_manzanas = new L.geoJSON(array_manzanas,{
+          onEachFeature: function (feature, layer) {
+            layer.options.zIndex = 0;
+            layer.setStyle({
+              "color": "#000000",
+              fillColor : that.getColorNivelsocioeconomico(feature.properties.nse_score1),
+              "opacity": 1,
+              "fillOpacity": 1,
+              "weight": 1
+            });             
+            layer.bindTooltip(function (layer) {
+              return "Manzana: "+layer.feature.properties.manzana_cve+". "+layer.feature.properties.nivel_socioeconomico; //merely sets the tooltip text
               }, {
               permanent: false,
               sticky:false

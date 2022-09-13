@@ -14,6 +14,7 @@ export class DemoService {
     readonly URL_API_HISTORICAL_DENUE = backend_url + '/apidemo/historicalDenue/';
     readonly URL_API_GET_COLONIA_FROM_AGEB = backend_url + '/apidemo/getColoniaFromAgeb/';
     readonly URL_API_GET_MUNICIPIO_FROM_AGEB = backend_url + '/apidemo/getMunicipioFromAgeb/';
+    readonly URL_API_GET_MANZANAS_FROM_AGEB = backend_url + '/apidemo/getManzanasFromAgeb/';
 
     constructor(private http: HttpClient) { }
 
@@ -64,6 +65,13 @@ export class DemoService {
     getMunicipioFromAgeb(municipio_cve){ 
         return this.http.post(this.URL_API_GET_MUNICIPIO_FROM_AGEB, {
             "municipio_cve": municipio_cve
+        }).toPromise();
+    }      
+
+    getManzanasFromAgeb(ageb_cve, wkt){ 
+        return this.http.post(this.URL_API_GET_MANZANAS_FROM_AGEB, {
+            "ageb_cve": ageb_cve,
+            "wkt": wkt
         }).toPromise();
     }      
 

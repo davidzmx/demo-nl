@@ -243,6 +243,27 @@ demoController.getColoniaFromAgeb = async(req, res) => {
 	
 };
 
+demoController.getManzanasFromAgeb = async(req, res) => {
+	console.log("getManzanasFromAgeb")
+	const { ageb_cve, wkt } = req.body;
+	console.log(wkt)	
+
+    await Promise.all([
+            databasePool.query(sql.getManzanasFromAgeb(ageb_cve, wkt))
+        ])
+        .then(poolRes => {
+            res.json({
+                manzanas: poolRes[0].rows,
+            });
+        })
+        .catch(err => {
+				console.log(err)
+				res.status(400).send({ message: err.message })
+			}
+		)	
+	
+};
+
 demoController.getMunicipioFromAgeb = async(req, res) => {
 	console.log("getMunicipioFromAgeb")
 	const { municipio_cve } = req.body;

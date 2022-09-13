@@ -632,6 +632,19 @@ input[type="checkbox"].infoCheckbox:checked+label:before {
     border-top: 0px solid;
 }
 
+.cases-legend .legend.titulo,
+.cases-legend-covidHospitals .legend.titulo {
+    /* border-top: 1px solid; */
+    border-bottom:1px solid;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    justify-content: center;
+}
+
+.cases-legends .legend.titulo {
+    justify-content: center;
+}
+
 
 /*    CSS para clusters  */
 

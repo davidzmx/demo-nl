@@ -200,6 +200,23 @@ sql.getColoniaFromAgeb = (wkt) => {
 	};
 };
 
+
+sql.getManzanasFromAgeb = (ageb_cve, wkt) => {
+	
+	return {
+		text: `
+			select cvegeo, nse_score1, ST_AsGeoJSON(geom) geom_json   
+			from nl.nl_manzana_nse
+			where  ST_Intersects(
+			   ST_GeomFromText($1, 4326),
+			   geom
+			  )	 
+        `,
+		values: [wkt]
+	};
+};
+
+
 sql.getMunicipioFromAgeb = (cve_municipio) => {
 	
 	return {
