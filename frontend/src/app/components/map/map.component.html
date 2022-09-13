@@ -29,16 +29,16 @@
             
             <div class="content-area">
                 <div class="section" *ngIf="showFilterTab">
-                    <span style="padding-left: 20px;">Nivel:</span>
+<!--                     <span style="padding-left: 20px;">Nivel:</span>
                     <div style="padding-left: 20px;">
                         <select name="select" class="classic" style="width:90%;" (change)="getNivel($event.target.value)">
                             <option value="ageb" selected>Ageb</option>
-                            <!-- <option value="manzana">Manzana</option> -->
-                            <!-- <option value="municipio">Municipio</option> -->
+                            <option value="manzana">Manzana</option>
+                            <option value="municipio">Municipio</option>
                           </select>
-                    </div>
-                    <br><br>
-
+                    </div> 
+                    <br><br> -->
+                    <br>
                     <span style="padding-left: 20px;">Rango de edad:</span>
                     <div style="padding-left: 20px;">
                         <select name="select" class="classic" style="width:90%;" (change)="selectAgeRange($event.target.value)">
@@ -280,6 +280,9 @@
                             <span class="dataSubHeader">Población</span>
                         </div>
                         <br><br>
+
+
+
                         <div class="popScene flipScene can-flip" (click)="toggleFlipCard($event, 'population')">
                             <!-- <span class="flipText can-flip">Haz clic para cambiar visualización</span> -->
                             <div id="populationFlipCard" class="flipcard can-flip">
@@ -298,12 +301,62 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!--economicamnete activa-->
+                                    <div class="data-card ventilators" ngbTooltip="Población económicamente activa por género">
+                                        <div class="body-card">
+                                            <div class="body-title" style="text-align: center; padding-left: 40px;">
+                                                Población económicamente activa
+                                            </div>
+                                            <div class="body-content">
+                                                <table style="width: 120%;">
+                                                    <tr style="text-align: center; font-size: medium;"> 
+                                                        <td style="width: 50%;"><span>Hombres</span></td>
+                                                        <td style="width: 50%;"><span>Mujeres</span></td>
+                                                    </tr>
+                                                    <tr style="text-align: center;">
+                                                        <td style="width: 50%;"><span>{{pobEA.pea_hombres}}</span></td>
+                                                        <td style="width: 50%;"> <span>{{pobEA.pea_mujeres}}</span></td>
+                                                    </tr>                                        
+                                                </table>
+                                                <!-- <span *ngIf="!isNumber(popData.value.total)" >{{ popData.value.total}}</span> -->
+                                            </div>
+                                        </div>                          
+                                    </div> 
+                                    <!--economicamnete activa-->
+
+                                    <!--población ocupada-->
+                                    <div class="data-card beds" ngbTooltip="Población ocupada por género">
+                                        <div class="body-card">
+                                            <div class="body-title" style="text-align: center; padding-left: 40px;">
+                                                Población ocupada
+                                            </div>
+                                            <div class="body-content">
+                                                <table style="width: 120%;">
+                                                    <tr style="text-align: center; font-size: medium;"> 
+                                                        <td style="width: 50%;"><span>Hombres</span></td>
+                                                        <td style="width: 50%;"><span>Mujeres</span></td>
+                                                    </tr>
+                                                    <tr style="text-align: center;">
+                                                        <td style="width: 50%;"><span>{{pobOcupada.poc_hombres}}</span></td>
+                                                        <td style="width: 50%;"> <span>{{pobOcupada.poc_mujeres}}</span></td>
+                                                    </tr>                                        
+                                                </table>
+                                                <!-- <span *ngIf="!isNumber(popData.value.total)" >{{ popData.value.total}}</span> -->
+                                            </div>
+                                        </div>                          
+                                    </div> 
+                                    <!--población ocupada-->                                    
+
                                 </div>
 <!--                                 <div class="amchart-card card-face flipcard-back can-flip">
                                     <div id="chartdiv"></div>
                                 </div> -->
                             </div>
-                        </div>                        
+                        </div> 
+                        
+                       
+
                         </div>
                         <!-- FIN de Tarjetas de población -->
 
@@ -338,7 +391,7 @@
                         <!-- <div id="chartDenueDiv" style="height: 400px; z-index: 99;" class="can-flip"></div> -->
 
                         <div id="mortalityFlipCard" style="height: 400px;" class="flipcard can-flip">
-                                <div class="mortality-container card-face flipcard-front can-flip"  height="400px" style="max-height: 400px; overflow-y: auto;">
+                                <div class="mortality-container card-face flipcard-back can-flip"  height="400px" style="max-height: 400px; overflow-y: auto;">
                                     
                                     <table>
             <!--                             <tr>
@@ -388,7 +441,7 @@
                                     </tr> -->
                                             </table>                        
                                 </div>
-                                <div class="card-face flipcard-back can-flip">
+                                <div class="card-face flipcard-front can-flip">
                                 <!-- <div class="amchart-card-mortality card-face flipcard-back can-flip"> -->
                                     <!-- <span>Gráfica</span> -->
                 <!--                         <span *ngIf="nivelPolygons == 'Country' || nivelPolygons == 'UrbanAreas'" class="no-data-legend can-flip">No hay datos</span>

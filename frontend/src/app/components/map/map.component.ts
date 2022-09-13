@@ -145,6 +145,18 @@ export class MapComponent implements OnInit {
 
   /****FIN variables para censo económico*** */
 
+  public pobEA = {
+    pea_hombres:this.numberWithCommas(1750498),
+    pea_mujeres:this.numberWithCommas(1111505),
+    pea_total:this.numberWithCommas(2862003)
+  }
+
+  public pobOcupada = {
+    poc_hombres:this.numberWithCommas(1711371),
+    poc_mujeres:this.numberWithCommas(1096078),
+    poc_total:this.numberWithCommas(2807449)
+  }  
+
   public pobData = {
     pobTotal: {
       title: 'Población total',
@@ -169,7 +181,7 @@ export class MapComponent implements OnInit {
       tooltip: 'Población femenina'
     },
 
-    pea: {
+/*     pea: {
       title: 'Población económicamente activa',
       type: 'ventilators',
       total: this.numberWithCommas(2862003),
@@ -213,7 +225,7 @@ export class MapComponent implements OnInit {
       total: this.numberWithCommas(1096078),
       logo: 'fas fa-female',
       tooltip: 'Población ocupada femenina'
-    },      
+    },     */  
 
   };
   
@@ -735,13 +747,13 @@ export class MapComponent implements OnInit {
               that.pobData.man.total=that.numberWithCommas(layer.feature.properties.pob_hombres);
               that.pobData.woman.total=that.numberWithCommas(layer.feature.properties.pob_mujeres);
               
-              that.pobData.pea.total = that.numberWithCommas(layer.feature.properties.pea);
-              that.pobData.pea_man.total=that.numberWithCommas(layer.feature.properties.pea_hombres);
-              that.pobData.pea_woman.total=that.numberWithCommas(layer.feature.properties.pea_mujeres);    
+              that.pobEA.pea_total = that.numberWithCommas(layer.feature.properties.pea);
+              that.pobEA.pea_hombres=that.numberWithCommas(layer.feature.properties.pea_hombres);
+              that.pobEA.pea_mujeres=that.numberWithCommas(layer.feature.properties.pea_mujeres);    
               
-              that.pobData.pocupada.total = that.numberWithCommas(layer.feature.properties.pocupada);
-              that.pobData.pocupada_man.total=that.numberWithCommas(layer.feature.properties.pocupada_hombres);
-              that.pobData.pocupada_woman.total=that.numberWithCommas(layer.feature.properties.pocupada_mujeres);               
+              that.pobOcupada.poc_total = that.numberWithCommas(layer.feature.properties.pocupada);
+              that.pobOcupada.poc_hombres=that.numberWithCommas(layer.feature.properties.pocupada_hombres);
+              that.pobOcupada.poc_mujeres=that.numberWithCommas(layer.feature.properties.pocupada_mujeres);               
               
               that.resultFilter = that.numberWithCommas(parseInt(layer.feature.properties.value));
               that.showResultFilter = true;
