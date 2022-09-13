@@ -679,7 +679,10 @@ export class MapComponent implements OnInit {
     let that=this;
     let filter = this.selected_age_range+this.selected_gender
     console.log(filter)
-    this.demoService.searchInfo(filter, this.selected_level).subscribe(data => {
+    //this.demoService.searchInfo(filter, this.selected_level).subscribe(data => {
+    this.demoService.searchInfo(filter, this.selected_level).then(
+        (data) => {
+
       console.log(data)
 
       let polygon_array = []
@@ -790,7 +793,16 @@ export class MapComponent implements OnInit {
       //this.layerGroup.addLayer(that.searched_polygons);
       //this.layerGroup.bringToFront(); 
       this.spinner.hide();
-  });
+  //});
+      },
+      (error) => {
+        //this.errorMessage();
+        this.spinner.hide();
+        console.log("error al consultar:")
+        console.log(error)
+        console.error('ERROR', error);
+      });  
+
   //this.spinner.hide();
   }
 

@@ -28,7 +28,7 @@ export class DemoService {
         return this.http.post(this.URL_API_SEARCH_FILTER, {
             "filter": filter,
             "nivel": nivel
-        });
+        }).toPromise();
     }    
 
     consultaDenue(cvegeo, nivel, wkt){ 
