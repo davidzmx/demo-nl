@@ -8,6 +8,9 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { NgxSpinnerService } from 'ngx-spinner';
 
+import sweetAlert from 'sweetalert2'
+
+
 //import { backend_url } from "../../../config/url.config";
 //import { PolygonService } from '../../services/polygon.service';
 import { DemoService } from '../../services/demo.service';
@@ -799,6 +802,13 @@ export class MapComponent implements OnInit {
         //this.errorMessage();
         this.spinner.hide();
         console.log("error al consultar:")
+
+        sweetAlert.fire({
+          title: 'Error!',
+          text: 'No existe información para el filtro seleccionado',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        })        
         console.log(error)
         console.error('ERROR', error);
       });  
